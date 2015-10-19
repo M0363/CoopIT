@@ -6,8 +6,14 @@
 //  Copyright © 2015 Pankaj Verma. All rights reserved.
 //
 
-#import "AppDelegate.h"
 
+
+#import "AppDelegate.h"
+#import "LeftMenuViewController.h"
+#import "RightMenuViewController.h"
+#import "MFSideMenu.h"
+#import "NewsViewController.h"
+#import "HomeViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -17,6 +23,31 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    LeftMenuViewController *lmvc = [[LeftMenuViewController alloc ]initWithNibName:@"LeftMenuViewController" bundle:nil];
+    RightMenuViewController *rmvc = [[RightMenuViewController alloc]initWithNibName:@"RightMenuViewController" bundle:nil];
+
+    HomeViewController *hvc = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
+    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:hvc];
+    //     nav.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Menu" style:UIBarButtonItemStyleDone target:self action:@selector(openLeftMenu)];
+   // UINavigationController *nav_cvc = [[UINavigationController alloc] initWithRootViewController:cvc];
+    
+    MFSideMenuContainerViewController *container = [MFSideMenuContainerViewController
+                                                    containerWithCenterViewController:nav
+                                                    leftMenuViewController:lmvc
+                                                    rightMenuViewController:rmvc];
+    
+  //  UINavigationController *passcodeNavigationController = [[UINavigationController alloc] initWithRootViewController:[MFSideMenuContainerViewController containerWithCenterViewController:nvc                                                    leftMenuViewController:lmvc                                                    rightMenuViewController:rmvc]];
+   // self.window.rootViewController = [MFSideMenuContainerViewController containerWithCenterViewController:cvc                                                    leftMenuViewController:lmvc
+   
+    
+    self.window.rootViewController.edgesForExtendedLayout = UIRectEdgeAll;
+//    NSArray *baritems = [NSArray arrayWithObjects:[UIImage imageNamed:@"crop"], nil];
+//    passcodeNavigationController.toolbarItems = baritems;
+//    passcodeNavigationController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"crop"] style:UIBarButtonSystemItemDone target:nil action:nil];
+    
+    self.window.rootViewController = container;
+
     return YES;
 }
 
@@ -41,5 +72,6 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
 
 @end

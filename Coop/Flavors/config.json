@@ -1,0 +1,94 @@
+ {
+     "BASE_URL" : "http://appfeeds.grahamdigital.com/",
+     "url": "Top%20Stories.json",
+     "BGCOLOR" : "0070FF",
+     "WEATHER_BASE_URL" : "",
+     "WEATHER_url" : "",
+ "MENU" : [{
+           "MENU_TITLE"  :      "Home",
+           "MENU_IMAGE"  :      "home",
+           "MENU_VIEW_CONTROLLER"  :      "HomeViewController"
+           
+           },
+           {
+           "MENU_TITLE"  :      "News Feed",
+            "MENU_IMAGE"  :      "news",
+           "MENU_VIEW_CONTROLLER"  :      "NewsViewController",
+           },
+           {
+           "MENU_TITLE"  :      "HAM Weather",
+            "MENU_IMAGE"  :      "weather",
+           "MENU_VIEW_CONTROLLER"  :      "HAMWeatherViewController"
+           },
+           {
+           "MENU_TITLE"  :      "Crop Prices",
+            "MENU_IMAGE"  :      "crop",
+           "MENU_VIEW_CONTROLLER"  :      "CropPricesViewController"
+           },
+           {
+           "MENU_TITLE"  :      "Twitter Channel",
+            "MENU_IMAGE"  :      "twitter",
+           "MENU_VIEW_CONTROLLER"  :      "TwitterChannelViewController"
+           
+           }],
+ "WEATHER" : [{
+                  "BASE_URL" : "",
+                  "url" : "",
+
+                  },
+              {
+              
+              "WEATHER_LOCATION" : "Banglore",
+              "WEATHER_TEMPERATURE" :  "30",
+              "WEATHER_IMAGE" : "cloudy"
+              
+              },
+              {
+              "WEATHER_LOCATION" : "Hyderabad",
+              "WEATHER_TEMPERATURE" : "40",
+              "WEATHER_IMAGE" : "rainy"
+              },
+              {
+              "WEATHER_LOCATION" : "Chennai",
+              "WEATHER_TEMPERATURE" : "45",
+              "WEATHER_IMAGE" : "sunny"
+              }],
+
+ "NEWS" :   [{
+             "NEWS_TITLE" : "NVIDIA Releases GeForce Share & GameStream Co-Op Early Beta",
+          "NEWS_IMAGE" :  "Coop1.jpg",
+          "NEWS_ARTICLE" : "Last month alongside the release of the GeForce GTX 950, NVIDIA also announced that they would be releasing a new suite of updates for GeForce Experience called Shared.",
+          "NEWS_URL" : "http://www.anandtech.com/show/9632/nvidia-releases-geforce-share-gamestream-coop-early-beta"
+          },
+          {
+          "NEWS_TITLE" : "Co-op loan fraud probe intensifies",
+          "NEWS_IMAGE" :  "Coop2.jpg",
+          "NEWS_ARTICLE" : "Detectives looking into the Cooperative Bank loan fraud investigation have stepped up their efforts, with more than 100 suspect loans under scrutiny, all of which were approved without collateral.",
+          "NEWS_URL" : "http://in-cyprus.com/co-op-loan-fraud-probe-intensifies/"
+          },
+          {
+          "NEWS_TITLE" : "More arrests in Ayia Fyla co-op bank scandal",
+          "NEWS_IMAGE" :  "Coop3.jpg",
+          "NEWS_ARTICLE" : "Police issued three more arrest warrants on Tuesday in connection to the cooperative bank scandal in Ayia Fyla, where four ex-employees are already behind bars charged with financial wrongdoing and another one is still on the run.",
+          "NEWS_URL" : "http://in-cyprus.com/more-arrests-in-ayia-fyla-co-op-bank-scandal/"
+          }],
+ 
+ "CROP" :[{
+          "CROP_NAME" : "Soybeans",             
+          "CROP_DATE" :  "16-05-2015",
+          "CROP_PRICE" : "$15",
+          "CROP_COMMENT" : "None"
+          },
+          {
+          "CROP_NAME" : "Corn",
+          "CROP_DATE" :  "10-06-2015",
+          "CROP_PRICE" : "$10",
+          "CROP_COMMENT" : "none"
+          },
+          {
+          "CROP_NAME" : "Rice",
+          "CROP_DATE" :  "12-05-2015",
+          "CROP_PRICE" : "$5",
+          "CROP_COMMENT" : "none"
+          }]
+  }

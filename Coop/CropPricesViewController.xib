@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8164.2" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8135.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CropPricesViewController">
+            <connections>
+                <outlet property="cropPriceTable" destination="gnB-aT-h63" id="Y1H-MT-9Mj"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j3v-lZ-ZtL">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <subviews>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="gnB-aT-h63">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="Ni5-x8-Q1J"/>
+                                <outlet property="delegate" destination="-1" id="LsC-da-hKu"/>
+                            </connections>
+                        </tableView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="gnB-aT-h63" secondAttribute="trailing" id="0Dz-ix-U9t"/>
+                        <constraint firstItem="gnB-aT-h63" firstAttribute="leading" secondItem="j3v-lZ-ZtL" secondAttribute="leading" id="3W2-lj-c3m"/>
+                        <constraint firstItem="gnB-aT-h63" firstAttribute="centerX" secondItem="j3v-lZ-ZtL" secondAttribute="centerX" id="BBT-iu-ubg"/>
+                        <constraint firstItem="gnB-aT-h63" firstAttribute="centerY" secondItem="j3v-lZ-ZtL" secondAttribute="centerY" id="H43-LG-WCB"/>
+                        <constraint firstItem="gnB-aT-h63" firstAttribute="top" secondItem="j3v-lZ-ZtL" secondAttribute="top" id="K9i-mc-eTx"/>
+                        <constraint firstAttribute="bottom" secondItem="gnB-aT-h63" secondAttribute="bottom" id="YFg-AD-V0f"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="j3v-lZ-ZtL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="7EC-ft-2xj"/>
+                <constraint firstAttribute="trailing" secondItem="j3v-lZ-ZtL" secondAttribute="trailing" id="c5Z-F3-qHn"/>
+                <constraint firstItem="j3v-lZ-ZtL" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="iUt-gc-vie"/>
+                <constraint firstAttribute="bottom" secondItem="j3v-lZ-ZtL" secondAttribute="bottom" id="kFZ-Ab-CpB"/>
+            </constraints>
+            <point key="canvasLocation" x="360" y="354"/>
+        </view>
+    </objects>
+</document>

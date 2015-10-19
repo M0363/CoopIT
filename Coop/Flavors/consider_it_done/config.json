@@ -1,0 +1,84 @@
+{
+ "BGCOLOR" : "050505",   
+    "MENU" : [{
+              "MENU_TITLE"  :      "Home",
+              "MENU_IMAGE"  :      "home",
+              "MENU_VIEW_CONTROLLER"  :      "HomeViewController"
+              
+              },
+              {
+              "MENU_TITLE"  :      "News Feed",
+              "MENU_IMAGE"  :      "news",
+              "MENU_VIEW_CONTROLLER"  :      "NewsViewController",
+              },
+              {
+              "MENU_TITLE"  :      "HAM Weather",
+              "MENU_IMAGE"  :      "weather",
+              "MENU_VIEW_CONTROLLER"  :      "HAMWeatherViewController"
+              },
+              {
+              "MENU_TITLE"  :      "Crop Prices",
+              "MENU_IMAGE"  :      "crop",
+              "MENU_VIEW_CONTROLLER"  :      "CropPricesViewController"
+              },
+              {
+              "MENU_TITLE"  :      "Twitter Channel",
+              "MENU_IMAGE"  :      "twitter",
+              "MENU_VIEW_CONTROLLER"  :      "TwitterChannelViewController"
+              
+              }],
+    "WEATHER" : [{
+                 "WEATHER_LOCATION" : "Banglore",
+                 "WEATHER_TEMPERATURE" :  "30",
+                 "WEATHER_IMAGE" : "cloudy"
+                 
+                 },
+                 {
+                 "WEATHER_LOCATION" : "Hyderabad",
+                 "WEATHER_TEMPERATURE" : "40",
+                 "WEATHER_IMAGE" : "rainy"
+                 },
+                 {
+                 "WEATHER_LOCATION" : "Chennai",
+                 "WEATHER_TEMPERATURE" : "45",
+                 "WEATHER_IMAGE" : "sunny"
+                 }],
+    
+    "NEWS" :   [{
+                "NEWS_TITLE" : "The Co-operators awards $100,000 worth of grants to eight developing co-operatives",
+                "NEWS_IMAGE" :  "Image1",
+                "NEWS_ARTICLE" : "Eight emerging Canadian co-operatives have received funding to help them expand and meet the needs of their communities",
+                "NEWS_URL" : "http://www.thenews.coop/97293/news/co-operatives/co-operators-awards-100000-worth-grants-eight-developing-co-operatives/"
+                },
+                {
+                "NEWS_TITLE" : "The path to worker buyouts: Does the UK need its own ‘Marcora Law’?",
+                "NEWS_IMAGE" :  "Image2",
+                "NEWS_ARTICLE" : "Since the 2008 financial crisis, worker buyouts have become an attractive option for employees looking to safeguard their jobs. Worker co-operatives are growing in regions most affected by the crisis with employees taking over their enterprises.",
+                "NEWS_URL" : "http://www.thenews.coop/97306/news/business/path-worker-buyouts-uk-need-marcora-law/"
+                },
+                {
+                "NEWS_TITLE" : "Westland Milk co-op says staff redundancies likely",
+                "NEWS_IMAGE" :  "cid1.jpg",
+                "NEWS_ARTICLE" : "Westland Milk Products has signalled the likely axing of jobs as it reduces costs in the global dairy downturn.The farmer-owned cooperative on Monday said it was conducting a review of staff roles across the company.",
+                "NEWS_URL" : "http://www.stuff.co.nz/business/72040993/westland-milk-coop-says-staff-redundancies-likely"
+                }],
+    
+    "CROP" :[{
+             "CROP_NAME" : "Potato",
+             "CROP_DATE" :  "18-04-2015",
+             "CROP_PRICE" : "$15",
+             "CROP_COMMENT" : "None"
+             },
+             {
+             "CROP_NAME" : "Chilly",
+             "CROP_DATE" :  "11-06-2015",
+             "CROP_PRICE" : "$10",
+             "CROP_COMMENT" : "none"
+             },
+             {
+             "CROP_NAME" : "Wheat",
+             "CROP_DATE" :  "17-05-2015",
+             "CROP_PRICE" : "$7",
+             "CROP_COMMENT" : "none"
+             }]
+}

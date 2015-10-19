@@ -4,14 +4,34 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>ConsiderItDone.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>Coop.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>Flavor2.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>D953968E1BA2D048000B81BC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D95396FF1BA2D8F4000B81BC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>D9C1B2341BA019A600E62331</key>
 		<dict>
 			<key>primary</key>

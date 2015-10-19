@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D9C1B2341BA019A600E62331"
-               BuildableName = "Coop.app"
+               BuildableName = "COOP_IT.app"
                BlueprintName = "Coop"
                ReferencedContainer = "container:Coop.xcodeproj">
             </BuildableReference>
@@ -53,7 +53,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D9C1B2341BA019A600E62331"
-            BuildableName = "Coop.app"
+            BuildableName = "COOP_IT.app"
             BlueprintName = "Coop"
             ReferencedContainer = "container:Coop.xcodeproj">
          </BuildableReference>
@@ -76,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D9C1B2341BA019A600E62331"
-            BuildableName = "Coop.app"
+            BuildableName = "COOP_IT.app"
             BlueprintName = "Coop"
             ReferencedContainer = "container:Coop.xcodeproj">
          </BuildableReference>
@@ -95,7 +95,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D9C1B2341BA019A600E62331"
-            BuildableName = "Coop.app"
+            BuildableName = "COOP_IT.app"
             BlueprintName = "Coop"
             ReferencedContainer = "container:Coop.xcodeproj">
          </BuildableReference>
