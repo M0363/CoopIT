@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "GDataXMLNode.h"
 //#import "GDataXMLElement-Extras.h"
+
+//comment
 @protocol myProto
 @optional
 -(void)sendData:(NSDictionary *)dictionary;
