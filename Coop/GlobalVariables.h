@@ -12,10 +12,10 @@
 @interface GlobalVariables : NSObject
 +(NSArray *)getNEWS;
 +(NSString *)getBASE_URL;
-+(NSString *)getURL;
++(NSString *)getTWITTER_URL;
++(NSString*)getTWITTER_USER;
 +(NSArray *)getMENU;
 +(NSArray *)getCROP;
 +(NSArray *)getWEATHER;
 +(UIColor *)getBGCOLOR;
-
 @end

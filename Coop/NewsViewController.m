@@ -53,11 +53,11 @@ NSDictionary *dict;
     descriptionArray = [[NSMutableArray alloc] init];
     
     //dict = [GlobalVariables getNEWS];
-     NSString *str = @"http://appfeeds.grahamdigital.com/Top%20Stories.json";
+     //NSString *str = @"http://appfeeds.grahamdigital.com/Top%20Stories.json";
         NSString *baseString = [GlobalVariables getBASE_URL];
-        NSString *urlString = [GlobalVariables getURL];
-        NSString *theURLString = [NSString stringWithFormat:@"%@%@",baseString,urlString];
-        NSURL *url = [NSURL URLWithString:str];
+       // NSString *urlString = [GlobalVariables getURL];
+        //NSString *theURLString = [NSString stringWithFormat:@"%@%@",baseString,urlString];
+        NSURL *url = [NSURL URLWithString:baseString];
         [AppConfig sharedInstance].delegate = self;
     [[AppConfig sharedInstance] getFromURL:url withParameters:nil];
       //  [[AppConfig sharedInstance]downloadFromURL:url];

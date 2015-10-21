@@ -93,8 +93,8 @@ return shared_instance;
 -(void)getFromURL:(NSURL *)url withParameters :(NSDictionary *)param{
     NSError *error;
 
-    NSURL *url1 = [NSURL URLWithString:@"http://feeds.abcnews.com/abcnews/usheadlines"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url1];
+  //  NSURL *url1 = [NSURL URLWithString:@"http://feeds.abcnews.com/abcnews/usheadlines"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {

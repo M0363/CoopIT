@@ -1,5 +1,8 @@
 {
- "BGCOLOR" : "050505",   
+ "BGCOLOR" : "050505",
+    "BASE_URL" : "http://feeds.abcnews.com/abcnews/moneyheadlines",
+    "TWITTER_URL" : "https://twitter.com/ConsiderIt_Done",
+    "TWITTER_USER" : "@ConsiderIt_Done",
     "MENU" : [{
               "MENU_TITLE"  :      "Home",
               "MENU_IMAGE"  :      "home",

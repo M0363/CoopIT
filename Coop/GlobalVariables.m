@@ -38,9 +38,14 @@
     NSString *value = [[AppConfig sharedInstance] lookupConfigByKey:@"BASE_URL"];
     return value;
 }
-+(NSString *)getURL{
-    NSString *value = [[AppConfig sharedInstance] lookupConfigByKey:@"url"];
++(NSString *)getTWITTER_URL{
+    NSString *value = [[AppConfig sharedInstance] lookupConfigByKey:@"TWITTER_URL"];
     return value;
+}
++(NSString*)getTWITTER_USER{
+    NSString *value = [[AppConfig sharedInstance] lookupConfigByKey:@"TWITTER_USER"];
+    return value;
+
 }
 +(NSArray *)getMENU{
     NSArray *value = [[AppConfig sharedInstance] lookupConfigByKey:@"MENU"];

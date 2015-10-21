@@ -1,6 +1,7 @@
  {
-     "BASE_URL" : "http://appfeeds.grahamdigital.com/",
-     "url": "Top%20Stories.json",
+     "BASE_URL" : "http://feeds.abcnews.com/abcnews/usheadlines",
+     "TWITTER_URL" : "https://twitter.com/IndianaEC",
+     "TWITTER_USER" : "@IndianaEC",
      "BGCOLOR" : "0070FF",
      "WEATHER_BASE_URL" : "",
      "WEATHER_url" : "",

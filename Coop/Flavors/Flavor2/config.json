@@ -1,5 +1,8 @@
  {
      "BGCOLOR" : "64a400",
+     "BASE_URL" : "http://feeds.abcnews.com/abcnews/healthheadlines",
+     "TWITTER_URL" : "https://twitter.com/Coopitalia",
+     "TWITTER_USER" : "@Coopitalia",
      "MENU" : [{
            "MENU_TITLE"  :      "Home",
            "MENU_IMAGE"  :      "home",

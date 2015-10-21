@@ -24,18 +24,20 @@
 @property (weak, nonatomic) IBOutlet UIView *weather_V;
 @property (weak, nonatomic) IBOutlet UIView *scrollView;
 
-@property (weak, nonatomic) IBOutlet UIButton *Home;
-@property (weak, nonatomic) IBOutlet UIButton *NewsButton;
-@property (weak, nonatomic) IBOutlet UIButton *weatherButton;
-@property (weak, nonatomic) IBOutlet UIButton *cropButton;
-@property (weak, nonatomic) IBOutlet UIButton *twitterButton;
-@property (weak, nonatomic) IBOutlet UIButton *otherButton;
+@property (weak, nonatomic) IBOutlet UIImageView *homeIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *newsIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *ewatherIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *cropIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *twitterIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *otherIcon;
+
 @end
 
 @implementation HomeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self designIcons];
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = self.bgColor;
     _scrollView.backgroundColor = self.bgColor;
@@ -63,6 +65,23 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+-(void)designIcons{
+     self.homeIcon.layer.cornerRadius = 30.0;
+     self.newsIcon.layer.cornerRadius = 30.0;
+     self.ewatherIcon.layer.cornerRadius = 30.0;
+     self.cropIcon.layer.cornerRadius = 30.0;
+     self.twitterIcon.layer.cornerRadius = 30.0;
+     self.otherIcon.layer.cornerRadius = 30.0;
+    _home_V.layer.cornerRadius = 30;
+    _crop_V.layer.cornerRadius = 30;
+    _other_V.layer.cornerRadius = 30;
+    _twitter_V.layer.cornerRadius = 30;
+    _news_V.layer.cornerRadius = 30;
+    _weather_V.layer.cornerRadius = 30;
+    
+    
+}
 - (IBAction)homeButtonTapped:(id)sender {
 }
 - (IBAction)NewsButtonTapped:(id)sender {

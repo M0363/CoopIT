@@ -14,6 +14,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKShareKit/FBSDKShareDialog.h>
+#import "GlobalVariables.h"
 
 @interface TwitterChannelViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *twitterTable;
@@ -184,7 +185,9 @@
 //     }];
 }
 -(void)tapForTwitter:(UITapGestureRecognizer *)tap{
-[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://twitter.com/Coopitalia"]];
+    NSString *urlString = [GlobalVariables getTWITTER_URL];
+
+[[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
 }
 -(void)designTheView{
     self.theView.layer.cornerRadius = 10.0f;
@@ -228,8 +231,9 @@
                  NSURL *requestURL = [NSURL URLWithString:
                                       @"https://api.twitter.com/1.1/statuses/user_timeline.json"];
                  
+                   NSString *urlString = [GlobalVariables getTWITTER_USER];
                  NSDictionary *parameters =
-                 @{@"screen_name" : @"@Coopitalia",
+                 @{@"screen_name" : urlString,
                    @"include_rts" : @"0",
                    @"trim_user" : @"1",
                    @"count" : @"20"};
@@ -481,7 +485,7 @@
     if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
     {
         SLComposeViewController *tweetSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
-        [tweetSheet setInitialText:@"Tweeting from my own app Pankaj! :)"];
+        [tweetSheet setInitialText:@"Tweeting from my own app! :)"];
         [tweetSheet addImage:[UIImage imageNamed:@"Image1"]];
         [tweetSheet addURL:[NSURL URLWithString:@"https://twitter.com/Coopitalia"]];
         [self presentViewController:tweetSheet animated:YES completion:nil];
