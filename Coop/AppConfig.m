@@ -91,7 +91,7 @@ return shared_instance;
     [operation start];
 }
 -(void)getFromURL:(NSURL *)url withParameters :(NSDictionary *)param{
-    NSError *error;
+   
 
   //  NSURL *url1 = [NSURL URLWithString:@"http://feeds.abcnews.com/abcnews/usheadlines"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -105,7 +105,8 @@ return shared_instance;
         [[self delegate] getNewsData:channel];
     }
         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                         printf("something went wrong\n");
+            [[self delegate] ErrorNewsData];
+            printf("something went wrong\n");
            }];
     [operation start];
 }

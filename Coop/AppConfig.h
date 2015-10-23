@@ -15,6 +15,7 @@
 @optional
 -(void)sendData:(NSDictionary *)dictionary;
 -(void)getNewsData:( GDataXMLElement *)newsArray;
+-(void)ErrorNewsData;
 @end
 
 @protocol WeatherProtocol

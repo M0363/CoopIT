@@ -16,6 +16,7 @@
 #import "MBProgressHUD.h"
 #import "UIKit+AFNetworking.h"
 #import "WebViewController.h"
+#import "AppDelegate.h"
 //#import "RSSParser.h"
 //#import "RSSItem.h"
 #import "GDataXMLNode.h"
@@ -33,25 +34,39 @@
 
 
 
-static NSMutableArray *imageUrlStringArray ;
-static NSMutableArray *titleArray ;
+//static NSMutableArray *imageUrlStringArray ;
+//static NSMutableArray *titleArray ;
 static NSMutableArray *linkStringArray ;
-static NSMutableArray *descriptionArray ;
-
+//static NSMutableArray *descriptionArray ;
+ NSMutableArray *dataArray;
 CGFloat itemWidth;
 CGFloat scrollWidth_L;
 CGFloat scrollWidth_P;
 NSDictionary *dict;
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+#pragma mark - Retriving data fom the database
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    NSManagedObjectContext *context = delegate.managedObjectContext;
+    NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"News"];
+   
+    NSMutableArray * result =  [[context executeFetchRequest:request error:NULL] mutableCopy];
+    if (result) {
+        dataArray = result;
+    }
+    else
+        printf("couldn't fetch request");
 
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Home";
-  imageUrlStringArray =  [[NSMutableArray alloc] init];
-   titleArray =  [[NSMutableArray alloc] init];
+//  imageUrlStringArray =  [[NSMutableArray alloc] init];
+//   titleArray =  [[NSMutableArray alloc] init];
     linkStringArray = [[NSMutableArray alloc] init];
-    descriptionArray = [[NSMutableArray alloc] init];
+//    descriptionArray = [[NSMutableArray alloc] init];
     
     //dict = [GlobalVariables getNEWS];
      //NSString *str = @"http://appfeeds.grahamdigital.com/Top%20Stories.json";
@@ -135,7 +150,7 @@ NSDictionary *dict;
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     //return [[dict objectForKey:@"items"] count];
-       return titleArray.count;
+       return dataArray.count;
     
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -178,29 +193,28 @@ NSDictionary *dict;
 //                                   } failure:nil];
    
     
+    cell.news_head.text = [dataArray[indexPath.row] valueForKey:@"heading"];
+    cell.news_article.text = [dataArray[indexPath.row] valueForKey:@"article"];
     
-    if ([titleArray[indexPath.row] length] > 30) {
-                        cell.news_head.font = [UIFont systemFontOfSize:16];
-                    }
-    cell.news_head.text = titleArray[indexPath.row];
-        cell.news_article.text = descriptionArray[indexPath.row];
-        cell.news_article.textColor = [UIColor brownColor];
-        cell.news_article.font = [UIFont systemFontOfSize:17];
+    cell.news_article.textColor = [UIColor brownColor];
+    cell.news_article.font = [UIFont systemFontOfSize:17];
     
-   
+    if (cell.news_head.text.length > 30) {
+        cell.news_head.font = [UIFont systemFontOfSize:16];
+    }
     
     
-    __weak NewsCollectionViewCell *weakCell = cell;
-    NSURL * imgUrl = [NSURL URLWithString:imageUrlStringArray[indexPath.row]];
+    
+    NSURL * imgUrl = [NSURL URLWithString:[dataArray[indexPath.row] valueForKey:@"image"]];
     NSURLRequest *request = [NSURLRequest requestWithURL:imgUrl];
-        [cell.news_image setImageWithURLRequest:request
-                              placeholderImage:[UIImage imageNamed:@"placeholder"]
-                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+    [cell.news_image setImageWithURLRequest:request
+                           placeholderImage:[UIImage imageNamed:@"placeholder"]
+                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                        cell.news_image.image = image;
+                                        printf("success download image\n");
+                                    } failure:nil];
     
-                                           weakCell.news_image.image = image;
-                                           [weakCell setNeedsLayout];
-    
-                                       } failure:nil];
+ 
     
 //    for (GDataXMLElement *news in newsChannel){
 //        for(GDataXMLElement *itemData in [news elementsForName:@"item"]){
@@ -289,7 +303,7 @@ NSDictionary *dict;
 
 //     RSSItem *item = [newsDataArray objectAtIndex:indexPath.row];
 //    CGFloat articleSize = [self getSizeOfText:[item itemDescription]];
-    CGFloat articleSize = [self getSizeOfText:descriptionArray[indexPath.row]];
+    CGFloat articleSize = [self getSizeOfText:[dataArray[indexPath.row] valueForKey:@"article"]];
     return CGSizeMake(itemWidth, 353+articleSize);
     //return CGSizeMake(itemWidth, 343+100);
 
@@ -311,8 +325,8 @@ NSDictionary *dict;
 //    NSURL *url = [NSURL URLWithString:[dict_News objectForKey:@"url"]];
 //     RSSItem *item = [newsDataArray objectAtIndex:indexPath.row];
 //    
-    NSURL *url = [NSURL URLWithString:linkStringArray[indexPath.row]];
-    NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+//    NSURL *url = [NSURL URLWithString:linkStringArray[indexPath.row]];
+//    NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
 //        UIWebView *web = [[UIWebView alloc]initWithFrame:CGRectMake(0, 64, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
 //    [web setDelegate:self];
 //    [web loadRequest:requestObj];
@@ -331,7 +345,7 @@ NSDictionary *dict;
         WebViewController *webViewController=[[WebViewController alloc]initWithNibName:@"WebViewController" bundle:nil];
         webViewController.theTitle = @"In News";
          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-        webViewController.requestObject = requestObj;
+        webViewController.requestUrl = linkStringArray[indexPath.row];
         [self presentViewController:webViewController
                            animated:YES
                          completion:nil];
@@ -350,14 +364,82 @@ NSDictionary *dict;
     printf("in News\n");
     [HUD hide:YES];
       [self setTitle:@"Blog"];
+//    NSArray *itemArray = [newsData elementsForName:@"item"];
+//    for (GDataXMLElement *item  in itemArray) {
+//     GDataXMLElement *media = [[item elementsForName:@"media:thumbnail"] lastObject];
+//        [imageUrlStringArray addObject:[[media attributeForName:@"url"] stringValue]];
+//    [titleArray addObject: [[[item elementsForName:@"title"] lastObject] stringValue]];
+//    [linkStringArray addObject:[[[item elementsForName:@"link"] lastObject] stringValue]];
+//    [descriptionArray addObject:[[[item elementsForName:@"description"] lastObject] stringValue]];
+//    }
+//    [self.news_CollectionView reloadData];
+    
+    
+    
+    
+    /*deleting data of the database */
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    NSManagedObjectContext *context = delegate.managedObjectContext;
+    NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"News"];
+//    NSPredicate *p=[NSPredicate predicateWithFormat:@"category == %@", viewTitle];
+//    [request setPredicate:p];
+    NSBatchDeleteRequest *delete = [[NSBatchDeleteRequest alloc] initWithFetchRequest:request];
+    
+    
+    NSError *deleteError = [[NSError alloc]init];
     NSArray *itemArray = [newsData elementsForName:@"item"];
-    for (GDataXMLElement *item  in itemArray) {
-     GDataXMLElement *media = [[item elementsForName:@"media:thumbnail"] lastObject];
-        [imageUrlStringArray addObject:[[media attributeForName:@"url"] stringValue]];
-    [titleArray addObject: [[[item elementsForName:@"title"] lastObject] stringValue]];
-    [linkStringArray addObject:[[[item elementsForName:@"link"] lastObject] stringValue]];
-    [descriptionArray addObject:[[[item elementsForName:@"description"] lastObject] stringValue]];
+    [context executeRequest:delete error:&deleteError];
+    itemArray = [newsData elementsForName:@"item"];
+    
+    //    Saving data to the database
+    
+    NSEntityDescription *description = [NSEntityDescription entityForName:@"News" inManagedObjectContext:context];
+    
+    
+    for ( GDataXMLElement *item in itemArray) {
+        NSManagedObject *obj = [[NSManagedObject alloc]initWithEntity:description insertIntoManagedObjectContext:context];
+        GDataXMLElement *media = [[item elementsForName:@"media:thumbnail"] lastObject];
+        [obj setValue:[[[item elementsForName:@"title"] lastObject] stringValue] forKey:@"heading"];
+        [obj setValue:[[media attributeForName:@"url"] stringValue] forKey:@"image"];
+        [obj setValue:[[[item elementsForName:@"description"] lastObject] stringValue] forKey:@"article"];
+        [linkStringArray addObject:[[[item elementsForName:@"link"] lastObject] stringValue]];
+        NSError *err = nil;
+        if (![context save:&err]) {
+            printf("could not save.")   ;
+        }
     }
+    
+    //Retriving data from the database
+    
+    NSMutableArray * result =  [[context executeFetchRequest:request error:NULL] mutableCopy];
+    
+    if (result.count > 0) {
+        dataArray = result;
+    }
+    else
+        printf("couldn't fetch request");
+    [self.news_CollectionView reloadData];
+
+}
+
+-(void)ErrorNewsData{
+    [HUD hide:YES];
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    NSManagedObjectContext *context = delegate.managedObjectContext;
+    NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"News"];
+    NSBatchDeleteRequest *delete = [[NSBatchDeleteRequest alloc] initWithFetchRequest:request];
+    
+    NSError *deleteError = nil;
+    
+    [context executeRequest:delete error:&deleteError];
+    
+    NSMutableArray * result =  [[context executeFetchRequest:request error:NULL] mutableCopy];
+    
+    if (result) {
+        dataArray = result;
+    }
+    else
+        printf("couldn't fetch request");
     [self.news_CollectionView reloadData];
 }
 @end

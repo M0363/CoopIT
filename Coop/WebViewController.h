@@ -13,6 +13,6 @@
 
 @property (weak, nonatomic) IBOutlet UIWebView *webDetailView;
 @property NSString * theTitle;
-@property  NSURLRequest *requestObject;
+@property  NSString *requestUrl;
 
 @end

@@ -156,7 +156,7 @@ static WeatherHTTPClient *client;
 //            daysWeather = weather_upcoming[indexPath.row];
 //            cell.textLabel.text = daysWeather[@"maxtempC"];
 //            cell.detailTextLabel.text = daysWeather[@"mintempC"];
-            cell.imageView.image = [UIImage imageNamed:periods[indexPath.row][@"icon"]];
+            cell.imageView.image = [UIImage imageNamed:periods[indexPath.row+1][@"icon"]];
             cell.textLabel.text = periods[indexPath.row+1][@"weather"];
             if (periods[indexPath.row+1][@"avgTempC"] == (id)[NSNull null])  {
                 cell.detailTextLabel.text = @"null";

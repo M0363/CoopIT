@@ -35,6 +35,33 @@
 		D9375BFB1BDA124C00981BF1 /* forward.png in Resources */ = {isa = PBXBuildFile; fileRef = D9375BF41BDA124C00981BF1 /* forward.png */; settings = {ASSET_TAGS = (); }; };
 		D9375BFC1BDA124C00981BF1 /* forward.png in Resources */ = {isa = PBXBuildFile; fileRef = D9375BF41BDA124C00981BF1 /* forward.png */; settings = {ASSET_TAGS = (); }; };
 		D9375BFD1BDA124C00981BF1 /* forward.png in Resources */ = {isa = PBXBuildFile; fileRef = D9375BF41BDA124C00981BF1 /* forward.png */; settings = {ASSET_TAGS = (); }; };
+		D9375C001BDA398C00981BF1 /* CoopDM.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D9375BFE1BDA398C00981BF1 /* CoopDM.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
+		D9375C011BDA398C00981BF1 /* CoopDM.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D9375BFE1BDA398C00981BF1 /* CoopDM.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
+		D9375C021BDA398C00981BF1 /* CoopDM.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D9375BFE1BDA398C00981BF1 /* CoopDM.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
+		D9375C651BDA665200981BF1 /* NewsDetail+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D9375C561BDA665200981BF1 /* NewsDetail+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		D9375C661BDA665200981BF1 /* NewsDetail+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D9375C561BDA665200981BF1 /* NewsDetail+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		D9375C671BDA665200981BF1 /* NewsDetail+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D9375C561BDA665200981BF1 /* NewsDetail+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		D9375C681BDA665200981BF1 /* NewsDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = D9375C581BDA665200981BF1 /* NewsDetail.m */; settings = {ASSET_TAGS = (); }; };
+		D9375C691BDA665200981BF1 /* NewsDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = D9375C581BDA665200981BF1 /* NewsDetail.m */; settings = {ASSET_TAGS = (); }; };
+		D9375C6A1BDA665200981BF1 /* NewsDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = D9375C581BDA665200981BF1 /* NewsDetail.m */; settings = {ASSET_TAGS = (); }; };
+		D9375C6B1BDA665200981BF1 /* Tweet+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D9375C5A1BDA665200981BF1 /* Tweet+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		D9375C6C1BDA665200981BF1 /* Tweet+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D9375C5A1BDA665200981BF1 /* Tweet+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		D9375C6D1BDA665200981BF1 /* Tweet+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D9375C5A1BDA665200981BF1 /* Tweet+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		D9375C6E1BDA665200981BF1 /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = D9375C5C1BDA665200981BF1 /* Tweet.m */; settings = {ASSET_TAGS = (); }; };
+		D9375C6F1BDA665200981BF1 /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = D9375C5C1BDA665200981BF1 /* Tweet.m */; settings = {ASSET_TAGS = (); }; };
+		D9375C701BDA665200981BF1 /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = D9375C5C1BDA665200981BF1 /* Tweet.m */; settings = {ASSET_TAGS = (); }; };
+		D9375C711BDA665200981BF1 /* News+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D9375C5E1BDA665200981BF1 /* News+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		D9375C721BDA665200981BF1 /* News+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D9375C5E1BDA665200981BF1 /* News+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		D9375C731BDA665200981BF1 /* News+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D9375C5E1BDA665200981BF1 /* News+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		D9375C741BDA665200981BF1 /* News.m in Sources */ = {isa = PBXBuildFile; fileRef = D9375C601BDA665200981BF1 /* News.m */; settings = {ASSET_TAGS = (); }; };
+		D9375C751BDA665200981BF1 /* News.m in Sources */ = {isa = PBXBuildFile; fileRef = D9375C601BDA665200981BF1 /* News.m */; settings = {ASSET_TAGS = (); }; };
+		D9375C761BDA665200981BF1 /* News.m in Sources */ = {isa = PBXBuildFile; fileRef = D9375C601BDA665200981BF1 /* News.m */; settings = {ASSET_TAGS = (); }; };
+		D9375C771BDA665200981BF1 /* Weather+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D9375C621BDA665200981BF1 /* Weather+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		D9375C781BDA665200981BF1 /* Weather+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D9375C621BDA665200981BF1 /* Weather+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		D9375C791BDA665200981BF1 /* Weather+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D9375C621BDA665200981BF1 /* Weather+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		D9375C7A1BDA665200981BF1 /* Weather.m in Sources */ = {isa = PBXBuildFile; fileRef = D9375C641BDA665200981BF1 /* Weather.m */; settings = {ASSET_TAGS = (); }; };
+		D9375C7B1BDA665200981BF1 /* Weather.m in Sources */ = {isa = PBXBuildFile; fileRef = D9375C641BDA665200981BF1 /* Weather.m */; settings = {ASSET_TAGS = (); }; };
+		D9375C7C1BDA665200981BF1 /* Weather.m in Sources */ = {isa = PBXBuildFile; fileRef = D9375C641BDA665200981BF1 /* Weather.m */; settings = {ASSET_TAGS = (); }; };
 		D93BB5801BA994CE0081386B /* Coop1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D93BB57F1BA994CE0081386B /* Coop1.jpg */; };
 		D93BB5821BA995A70081386B /* Coop2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D93BB5811BA995A70081386B /* Coop2.jpg */; };
 		D93BB5841BA996540081386B /* Coop3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D93BB5831BA996540081386B /* Coop3.jpg */; };
@@ -666,6 +693,23 @@
 		D9375BF21BDA124C00981BF1 /* backword.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backword.png; sourceTree = "<group>"; };
 		D9375BF31BDA124C00981BF1 /* cross.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cross.png; sourceTree = "<group>"; };
 		D9375BF41BDA124C00981BF1 /* forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forward.png; sourceTree = "<group>"; };
+		D9375BFF1BDA398C00981BF1 /* CoopDM.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoopDM.xcdatamodel; sourceTree = "<group>"; };
+		D9375C551BDA665200981BF1 /* NewsDetail+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NewsDetail+CoreDataProperties.h"; sourceTree = "<group>"; };
+		D9375C561BDA665200981BF1 /* NewsDetail+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NewsDetail+CoreDataProperties.m"; sourceTree = "<group>"; };
+		D9375C571BDA665200981BF1 /* NewsDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsDetail.h; sourceTree = "<group>"; };
+		D9375C581BDA665200981BF1 /* NewsDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsDetail.m; sourceTree = "<group>"; };
+		D9375C591BDA665200981BF1 /* Tweet+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Tweet+CoreDataProperties.h"; sourceTree = "<group>"; };
+		D9375C5A1BDA665200981BF1 /* Tweet+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Tweet+CoreDataProperties.m"; sourceTree = "<group>"; };
+		D9375C5B1BDA665200981BF1 /* Tweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tweet.h; sourceTree = "<group>"; };
+		D9375C5C1BDA665200981BF1 /* Tweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tweet.m; sourceTree = "<group>"; };
+		D9375C5D1BDA665200981BF1 /* News+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "News+CoreDataProperties.h"; sourceTree = "<group>"; };
+		D9375C5E1BDA665200981BF1 /* News+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "News+CoreDataProperties.m"; sourceTree = "<group>"; };
+		D9375C5F1BDA665200981BF1 /* News.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = News.h; sourceTree = "<group>"; };
+		D9375C601BDA665200981BF1 /* News.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = News.m; sourceTree = "<group>"; };
+		D9375C611BDA665200981BF1 /* Weather+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Weather+CoreDataProperties.h"; sourceTree = "<group>"; };
+		D9375C621BDA665200981BF1 /* Weather+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Weather+CoreDataProperties.m"; sourceTree = "<group>"; };
+		D9375C631BDA665200981BF1 /* Weather.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Weather.h; sourceTree = "<group>"; };
+		D9375C641BDA665200981BF1 /* Weather.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Weather.m; sourceTree = "<group>"; };
 		D93BB57F1BA994CE0081386B /* Coop1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Coop1.jpg; sourceTree = "<group>"; };
 		D93BB5811BA995A70081386B /* Coop2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Coop2.jpg; sourceTree = "<group>"; };
 		D93BB5831BA996540081386B /* Coop3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Coop3.jpg; sourceTree = "<group>"; };
@@ -1015,6 +1059,40 @@
 			name = NewsDetail;
 			sourceTree = "<group>";
 		};
+		D9375C211BDA3BD400981BF1 /* BaseView */ = {
+			isa = PBXGroup;
+			children = (
+				D95396891BA2B4EF000B81BC /* BaseViewController.h */,
+				D953968A1BA2B4EF000B81BC /* BaseViewController.m */,
+				D953968B1BA2B4EF000B81BC /* BaseViewController.xib */,
+			);
+			name = BaseView;
+			sourceTree = "<group>";
+		};
+		D9375C221BDA3C1400981BF1 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				D9375BFE1BDA398C00981BF1 /* CoopDM.xcdatamodeld */,
+				D9375C551BDA665200981BF1 /* NewsDetail+CoreDataProperties.h */,
+				D9375C561BDA665200981BF1 /* NewsDetail+CoreDataProperties.m */,
+				D9375C571BDA665200981BF1 /* NewsDetail.h */,
+				D9375C581BDA665200981BF1 /* NewsDetail.m */,
+				D9375C591BDA665200981BF1 /* Tweet+CoreDataProperties.h */,
+				D9375C5A1BDA665200981BF1 /* Tweet+CoreDataProperties.m */,
+				D9375C5B1BDA665200981BF1 /* Tweet.h */,
+				D9375C5C1BDA665200981BF1 /* Tweet.m */,
+				D9375C5D1BDA665200981BF1 /* News+CoreDataProperties.h */,
+				D9375C5E1BDA665200981BF1 /* News+CoreDataProperties.m */,
+				D9375C5F1BDA665200981BF1 /* News.h */,
+				D9375C601BDA665200981BF1 /* News.m */,
+				D9375C611BDA665200981BF1 /* Weather+CoreDataProperties.h */,
+				D9375C621BDA665200981BF1 /* Weather+CoreDataProperties.m */,
+				D9375C631BDA665200981BF1 /* Weather.h */,
+				D9375C641BDA665200981BF1 /* Weather.m */,
+			);
+			name = DataModel;
+			sourceTree = "<group>";
+		};
 		D95396E51BA2D13C000B81BC /* Flavors */ = {
 			isa = PBXGroup;
 			children = (
@@ -1208,21 +1286,14 @@
 				D913DE101BA93B7B00C36756 /* GlobalVariables.h */,
 				D913DE111BA93B7B00C36756 /* AppConfig.m */,
 				D913DE121BA93B7B00C36756 /* GlobalVariables.m */,
+				D90A86E51BAC305F00ADA402 /* WeatherHTTPClient.h */,
+				D90A86E61BAC305F00ADA402 /* WeatherHTTPClient.m */,
 				D95396E51BA2D13C000B81BC /* Flavors */,
 				D9EA20111BA148880081A409 /* Images */,
 				D9EA20101BA148570081A409 /* Frameworks */,
 				D9EA20091BA143920081A409 /* Model */,
 				D9C1B26B1BA019BB00E62331 /* ThirdParty */,
-				D9C1B23E1BA019A600E62331 /* ViewController.h */,
-				D9C1B23F1BA019A600E62331 /* ViewController.m */,
-				D9C1B2411BA019A600E62331 /* Main.storyboard */,
-				D9C1B2461BA019A600E62331 /* LaunchScreen.storyboard */,
 				D9C1B2381BA019A600E62331 /* Supporting Files */,
-				D95396891BA2B4EF000B81BC /* BaseViewController.h */,
-				D953968A1BA2B4EF000B81BC /* BaseViewController.m */,
-				D953968B1BA2B4EF000B81BC /* BaseViewController.xib */,
-				D90A86E51BAC305F00ADA402 /* WeatherHTTPClient.h */,
-				D90A86E61BAC305F00ADA402 /* WeatherHTTPClient.m */,
 			);
 			path = Coop;
 			sourceTree = "<group>";
@@ -1230,6 +1301,10 @@
 		D9C1B2381BA019A600E62331 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D9C1B23E1BA019A600E62331 /* ViewController.h */,
+				D9C1B23F1BA019A600E62331 /* ViewController.m */,
+				D9C1B2411BA019A600E62331 /* Main.storyboard */,
+				D9C1B2461BA019A600E62331 /* LaunchScreen.storyboard */,
 				D9C1B2391BA019A600E62331 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -1354,6 +1429,8 @@
 		D9EA20091BA143920081A409 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D9375C221BDA3C1400981BF1 /* DataModel */,
+				D9375C211BDA3BD400981BF1 /* BaseView */,
 				D9EF46591BA7DCA8000E6A40 /* Home */,
 				D9EA200D1BA144420081A409 /* CenterView */,
 				D9EA200C1BA144150081A409 /* RightMenu */,
@@ -2219,6 +2296,7 @@
 				D95396951BA2D048000B81BC /* AFURLConnectionOperation.m in Sources */,
 				D95396961BA2D048000B81BC /* AFSecurityPolicy.m in Sources */,
 				D95396971BA2D048000B81BC /* UIButton+AFNetworking.m in Sources */,
+				D9375C6F1BDA665200981BF1 /* Tweet.m in Sources */,
 				D9D949941BB001680006BFAC /* RSSParser.m in Sources */,
 				D95396981BA2D048000B81BC /* CropPricesTableViewCell.m in Sources */,
 				D913DE171BA93B7B00C36756 /* GlobalVariables.m in Sources */,
@@ -2231,6 +2309,8 @@
 				D953969E1BA2D048000B81BC /* AFHTTPSessionManager.m in Sources */,
 				D9D949A31BB03D560006BFAC /* GDataXMLNode.m in Sources */,
 				D953969F1BA2D048000B81BC /* LeftMenuViewController.m in Sources */,
+				D9375C751BDA665200981BF1 /* News.m in Sources */,
+				D9375C7B1BDA665200981BF1 /* Weather.m in Sources */,
 				D95396A01BA2D048000B81BC /* RightMenuViewController.m in Sources */,
 				D95396A11BA2D048000B81BC /* SVWebViewControllerActivity.m in Sources */,
 				D9D949911BB001680006BFAC /* RSSItem.m in Sources */,
@@ -2239,21 +2319,27 @@
 				D95396A41BA2D048000B81BC /* UIAlertView+AFNetworking.m in Sources */,
 				D95396A51BA2D048000B81BC /* MFSideMenuShadow.m in Sources */,
 				D95396A61BA2D048000B81BC /* NewsViewController.m in Sources */,
+				D9375C691BDA665200981BF1 /* NewsDetail.m in Sources */,
 				D95396A71BA2D048000B81BC /* AFHTTPRequestOperationManager.m in Sources */,
 				D9D949A01BB03D560006BFAC /* GDataXMLElement-Extras.m in Sources */,
 				D95396A81BA2D048000B81BC /* UIWebView+AFNetworking.m in Sources */,
 				D95396A91BA2D048000B81BC /* UIViewController+MFSideMenuAdditions.m in Sources */,
+				D9375C781BDA665200981BF1 /* Weather+CoreDataProperties.m in Sources */,
 				D913DE141BA93B7B00C36756 /* AppConfig.m in Sources */,
 				D95396AA1BA2D048000B81BC /* AFHTTPRequestOperation.m in Sources */,
 				D95396AB1BA2D048000B81BC /* UIRefreshControl+AFNetworking.m in Sources */,
 				D95396AC1BA2D048000B81BC /* TwitterChannelViewController.m in Sources */,
 				D95396AD1BA2D048000B81BC /* AFURLSessionManager.m in Sources */,
+				D9375C011BDA398C00981BF1 /* CoopDM.xcdatamodeld in Sources */,
 				D95396AF1BA2D048000B81BC /* AFNetworkReachabilityManager.m in Sources */,
 				D95396B01BA2D048000B81BC /* AFURLResponseSerialization.m in Sources */,
 				D95396B21BA2D048000B81BC /* AFURLRequestSerialization.m in Sources */,
 				D90A86E81BAC305F00ADA402 /* WeatherHTTPClient.m in Sources */,
 				D95396B31BA2D048000B81BC /* AppDelegate.m in Sources */,
+				D9375C721BDA665200981BF1 /* News+CoreDataProperties.m in Sources */,
 				D95396B41BA2D048000B81BC /* LeftMenuTableViewCell.m in Sources */,
+				D9375C661BDA665200981BF1 /* NewsDetail+CoreDataProperties.m in Sources */,
+				D9375C6C1BDA665200981BF1 /* Tweet+CoreDataProperties.m in Sources */,
 				D95396B51BA2D048000B81BC /* main.m in Sources */,
 				D9375BED1BDA0F8F00981BF1 /* WebViewController.m in Sources */,
 				D95396B61BA2D048000B81BC /* SVModalWebViewController.m in Sources */,
@@ -2274,6 +2360,7 @@
 				D95397061BA2D8F4000B81BC /* AFURLConnectionOperation.m in Sources */,
 				D95397071BA2D8F4000B81BC /* AFSecurityPolicy.m in Sources */,
 				D95397081BA2D8F4000B81BC /* UIButton+AFNetworking.m in Sources */,
+				D9375C701BDA665200981BF1 /* Tweet.m in Sources */,
 				D9D949951BB001680006BFAC /* RSSParser.m in Sources */,
 				D95397091BA2D8F4000B81BC /* CropPricesTableViewCell.m in Sources */,
 				D913DE181BA93B7B00C36756 /* GlobalVariables.m in Sources */,
@@ -2286,6 +2373,8 @@
 				D953970F1BA2D8F4000B81BC /* AFHTTPSessionManager.m in Sources */,
 				D9D949A41BB03D560006BFAC /* GDataXMLNode.m in Sources */,
 				D95397101BA2D8F4000B81BC /* LeftMenuViewController.m in Sources */,
+				D9375C761BDA665200981BF1 /* News.m in Sources */,
+				D9375C7C1BDA665200981BF1 /* Weather.m in Sources */,
 				D95397111BA2D8F4000B81BC /* RightMenuViewController.m in Sources */,
 				D95397121BA2D8F4000B81BC /* SVWebViewControllerActivity.m in Sources */,
 				D9D949921BB001680006BFAC /* RSSItem.m in Sources */,
@@ -2294,21 +2383,27 @@
 				D95397151BA2D8F4000B81BC /* UIAlertView+AFNetworking.m in Sources */,
 				D95397161BA2D8F4000B81BC /* MFSideMenuShadow.m in Sources */,
 				D95397171BA2D8F4000B81BC /* NewsViewController.m in Sources */,
+				D9375C6A1BDA665200981BF1 /* NewsDetail.m in Sources */,
 				D95397181BA2D8F4000B81BC /* AFHTTPRequestOperationManager.m in Sources */,
 				D9D949A11BB03D560006BFAC /* GDataXMLElement-Extras.m in Sources */,
 				D95397191BA2D8F4000B81BC /* UIWebView+AFNetworking.m in Sources */,
 				D953971A1BA2D8F4000B81BC /* UIViewController+MFSideMenuAdditions.m in Sources */,
+				D9375C791BDA665200981BF1 /* Weather+CoreDataProperties.m in Sources */,
 				D953971B1BA2D8F4000B81BC /* AFHTTPRequestOperation.m in Sources */,
 				D913DE151BA93B7B00C36756 /* AppConfig.m in Sources */,
 				D953971C1BA2D8F4000B81BC /* UIRefreshControl+AFNetworking.m in Sources */,
 				D953971D1BA2D8F4000B81BC /* TwitterChannelViewController.m in Sources */,
 				D953971E1BA2D8F4000B81BC /* AFURLSessionManager.m in Sources */,
+				D9375C021BDA398C00981BF1 /* CoopDM.xcdatamodeld in Sources */,
 				D95397201BA2D8F4000B81BC /* AFNetworkReachabilityManager.m in Sources */,
 				D95397211BA2D8F4000B81BC /* AFURLResponseSerialization.m in Sources */,
 				D95397231BA2D8F4000B81BC /* AFURLRequestSerialization.m in Sources */,
 				D90A86E91BAC305F00ADA402 /* WeatherHTTPClient.m in Sources */,
 				D95397241BA2D8F4000B81BC /* AppDelegate.m in Sources */,
+				D9375C731BDA665200981BF1 /* News+CoreDataProperties.m in Sources */,
 				D95397251BA2D8F4000B81BC /* LeftMenuTableViewCell.m in Sources */,
+				D9375C671BDA665200981BF1 /* NewsDetail+CoreDataProperties.m in Sources */,
+				D9375C6D1BDA665200981BF1 /* Tweet+CoreDataProperties.m in Sources */,
 				D95397261BA2D8F4000B81BC /* main.m in Sources */,
 				D9375BEE1BDA0F8F00981BF1 /* WebViewController.m in Sources */,
 				D95397271BA2D8F4000B81BC /* SVModalWebViewController.m in Sources */,
@@ -2329,6 +2424,7 @@
 				D9EA203F1BA14E420081A409 /* AFURLConnectionOperation.m in Sources */,
 				D9EA203E1BA14E420081A409 /* AFSecurityPolicy.m in Sources */,
 				D913DE161BA93B7B00C36756 /* GlobalVariables.m in Sources */,
+				D9375C6E1BDA665200981BF1 /* Tweet.m in Sources */,
 				D9D949931BB001680006BFAC /* RSSParser.m in Sources */,
 				D9EA20461BA14E420081A409 /* UIButton+AFNetworking.m in Sources */,
 				D9EA205A1BA158C10081A409 /* CropPricesTableViewCell.m in Sources */,
@@ -2341,6 +2437,8 @@
 				D953968C1BA2B4EF000B81BC /* BaseViewController.m in Sources */,
 				D9D949A21BB03D560006BFAC /* GDataXMLNode.m in Sources */,
 				D9EA203C1BA14E420081A409 /* AFHTTPSessionManager.m in Sources */,
+				D9375C741BDA665200981BF1 /* News.m in Sources */,
+				D9375C7A1BDA665200981BF1 /* Weather.m in Sources */,
 				D9C1B2811BA01A3D00E62331 /* LeftMenuViewController.m in Sources */,
 				D9C1B2861BA01A5700E62331 /* RightMenuViewController.m in Sources */,
 				D9D949901BB001680006BFAC /* RSSItem.m in Sources */,
@@ -2349,21 +2447,27 @@
 				D9EA20431BA14E420081A409 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				D9EA20451BA14E420081A409 /* UIAlertView+AFNetworking.m in Sources */,
 				D9C1B2751BA019CA00E62331 /* MFSideMenuShadow.m in Sources */,
+				D9375C681BDA665200981BF1 /* NewsDetail.m in Sources */,
 				D9C1B2A71BA0594F00E62331 /* NewsViewController.m in Sources */,
 				D9D9499F1BB03D560006BFAC /* GDataXMLElement-Extras.m in Sources */,
 				D9EA203B1BA14E420081A409 /* AFHTTPRequestOperationManager.m in Sources */,
 				D9EA204A1BA14E420081A409 /* UIWebView+AFNetworking.m in Sources */,
+				D9375C771BDA665200981BF1 /* Weather+CoreDataProperties.m in Sources */,
 				D9C1B2761BA019CA00E62331 /* UIViewController+MFSideMenuAdditions.m in Sources */,
 				D9EA203A1BA14E420081A409 /* AFHTTPRequestOperation.m in Sources */,
 				D9EA20491BA14E420081A409 /* UIRefreshControl+AFNetworking.m in Sources */,
 				D9EA20641BA16E7E0081A409 /* TwitterChannelViewController.m in Sources */,
 				D9EA20421BA14E420081A409 /* AFURLSessionManager.m in Sources */,
+				D9375C001BDA398C00981BF1 /* CoopDM.xcdatamodeld in Sources */,
 				D9EA203D1BA14E420081A409 /* AFNetworkReachabilityManager.m in Sources */,
 				D9EA20411BA14E420081A409 /* AFURLResponseSerialization.m in Sources */,
 				D9EA20401BA14E420081A409 /* AFURLRequestSerialization.m in Sources */,
 				D90A86E71BAC305F00ADA402 /* WeatherHTTPClient.m in Sources */,
 				D9C1B23D1BA019A600E62331 /* AppDelegate.m in Sources */,
+				D9375C711BDA665200981BF1 /* News+CoreDataProperties.m in Sources */,
 				D9C1B2901BA01ECE00E62331 /* LeftMenuTableViewCell.m in Sources */,
+				D9375C651BDA665200981BF1 /* NewsDetail+CoreDataProperties.m in Sources */,
+				D9375C6B1BDA665200981BF1 /* Tweet+CoreDataProperties.m in Sources */,
 				D9C1B23A1BA019A600E62331 /* main.m in Sources */,
 				D9375BEC1BDA0F8F00981BF1 /* WebViewController.m in Sources */,
 				D9C1B2DA1BA0710500E62331 /* SVModalWebViewController.m in Sources */,
@@ -2755,6 +2859,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D9375BFE1BDA398C00981BF1 /* CoopDM.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D9375BFF1BDA398C00981BF1 /* CoopDM.xcdatamodel */,
+			);
+			currentVersion = D9375BFF1BDA398C00981BF1 /* CoopDM.xcdatamodel */;
+			path = CoopDM.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = D9C1B22D1BA019A600E62331 /* Project object */;
 }

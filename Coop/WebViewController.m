@@ -7,6 +7,8 @@
 //
 
 #import "WebViewController.h"
+#import "AppDelegate.h"
+
 
 @interface WebViewController ()<UIWebViewDelegate>
 
@@ -22,10 +24,67 @@
     [super viewDidLoad];
     _webTitle.text = _theTitle;
     _webDetailView.delegate = self;
+  
+    NSURL *requestURL = [NSURL URLWithString:_requestUrl];
     
-    // Do any additional setup after loading the view from its nib.
-    [self.webDetailView loadRequest:self.requestObject];
-}
+   // [self.webDetailView loadRequest:[NSURLRequest requestWithURL:requestURL]];
+    __block NSError *error;
+    __block NSString *page;
+  //  NSString *html = [self.webDetailView stringByEvaluatingJavaScriptFromString: @"document.body.innerHTML"];
+    NSString *html =  [NSString stringWithContentsOfURL:requestURL encoding:NSASCIIStringEncoding error:&error];
+
+    // delete data from database
+    
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    NSManagedObjectContext *context = delegate.managedObjectContext;
+    NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"NewsDetail"];
+    if (html != nil) {
+            NSPredicate *p=[NSPredicate predicateWithFormat:@"baseUrl == %@", _requestUrl];
+           [request setPredicate:p];
+        NSBatchDeleteRequest *delete = [[NSBatchDeleteRequest alloc] initWithFetchRequest:request];
+        
+        
+        NSError *deleteError = [[NSError alloc]init];
+        
+        [context executeRequest:delete error:&deleteError];
+    }
+    
+    
+    //    Saving data to the database
+    
+    NSEntityDescription *description = [NSEntityDescription entityForName:@"NewsDetail" inManagedObjectContext:context];
+    
+    
+   
+        NSManagedObject *obj = [[NSManagedObject alloc]initWithEntity:description insertIntoManagedObjectContext:context];
+        [obj setValue: html forKey:@"html"];
+        [obj setValue:_requestUrl forKey:@"baseUrl"];
+               NSError *err = nil;
+        if (![context save:&err]) {
+            printf("could not save.")   ;
+        }
+   
+    
+    //Retriving data from the database
+    
+    NSMutableArray * result =  [[context executeFetchRequest:request error:NULL] mutableCopy];
+    
+    if (result.count > 0) {
+       [self.webDetailView loadHTMLString:[result[0] valueForKey:@"html"] baseURL:requestURL]; ;
+    }
+    else
+        printf("couldn't fetch request");
+   
+    
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+    page = [NSString stringWithContentsOfURL:requestURL
+                                              encoding:NSASCIIStringEncoding
+                                                 error:&error];
+        //[self.webDetailView loadHTMLString:page baseURL:requestURL];
+    });
+    
+ }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
