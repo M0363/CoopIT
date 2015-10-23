@@ -20,6 +20,21 @@
 		D913DE1A1BA93BA500C36756 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = D913DE191BA93BA500C36756 /* config.json */; };
 		D913DE1C1BA93BB800C36756 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = D913DE1B1BA93BB800C36756 /* config.json */; };
 		D913DE1F1BA98B6C00C36756 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = D913DE1E1BA98B6C00C36756 /* config.json */; };
+		D9375BEC1BDA0F8F00981BF1 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9375BEA1BDA0F8F00981BF1 /* WebViewController.m */; settings = {ASSET_TAGS = (); }; };
+		D9375BED1BDA0F8F00981BF1 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9375BEA1BDA0F8F00981BF1 /* WebViewController.m */; settings = {ASSET_TAGS = (); }; };
+		D9375BEE1BDA0F8F00981BF1 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9375BEA1BDA0F8F00981BF1 /* WebViewController.m */; settings = {ASSET_TAGS = (); }; };
+		D9375BEF1BDA0F8F00981BF1 /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9375BEB1BDA0F8F00981BF1 /* WebViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		D9375BF01BDA0F8F00981BF1 /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9375BEB1BDA0F8F00981BF1 /* WebViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		D9375BF11BDA0F8F00981BF1 /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9375BEB1BDA0F8F00981BF1 /* WebViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		D9375BF51BDA124C00981BF1 /* backword.png in Resources */ = {isa = PBXBuildFile; fileRef = D9375BF21BDA124C00981BF1 /* backword.png */; settings = {ASSET_TAGS = (); }; };
+		D9375BF61BDA124C00981BF1 /* backword.png in Resources */ = {isa = PBXBuildFile; fileRef = D9375BF21BDA124C00981BF1 /* backword.png */; settings = {ASSET_TAGS = (); }; };
+		D9375BF71BDA124C00981BF1 /* backword.png in Resources */ = {isa = PBXBuildFile; fileRef = D9375BF21BDA124C00981BF1 /* backword.png */; settings = {ASSET_TAGS = (); }; };
+		D9375BF81BDA124C00981BF1 /* cross.png in Resources */ = {isa = PBXBuildFile; fileRef = D9375BF31BDA124C00981BF1 /* cross.png */; settings = {ASSET_TAGS = (); }; };
+		D9375BF91BDA124C00981BF1 /* cross.png in Resources */ = {isa = PBXBuildFile; fileRef = D9375BF31BDA124C00981BF1 /* cross.png */; settings = {ASSET_TAGS = (); }; };
+		D9375BFA1BDA124C00981BF1 /* cross.png in Resources */ = {isa = PBXBuildFile; fileRef = D9375BF31BDA124C00981BF1 /* cross.png */; settings = {ASSET_TAGS = (); }; };
+		D9375BFB1BDA124C00981BF1 /* forward.png in Resources */ = {isa = PBXBuildFile; fileRef = D9375BF41BDA124C00981BF1 /* forward.png */; settings = {ASSET_TAGS = (); }; };
+		D9375BFC1BDA124C00981BF1 /* forward.png in Resources */ = {isa = PBXBuildFile; fileRef = D9375BF41BDA124C00981BF1 /* forward.png */; settings = {ASSET_TAGS = (); }; };
+		D9375BFD1BDA124C00981BF1 /* forward.png in Resources */ = {isa = PBXBuildFile; fileRef = D9375BF41BDA124C00981BF1 /* forward.png */; settings = {ASSET_TAGS = (); }; };
 		D93BB5801BA994CE0081386B /* Coop1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D93BB57F1BA994CE0081386B /* Coop1.jpg */; };
 		D93BB5821BA995A70081386B /* Coop2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D93BB5811BA995A70081386B /* Coop2.jpg */; };
 		D93BB5841BA996540081386B /* Coop3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D93BB5831BA996540081386B /* Coop3.jpg */; };
@@ -645,6 +660,12 @@
 		D913DE191BA93BA500C36756 /* config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
 		D913DE1B1BA93BB800C36756 /* config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
 		D913DE1E1BA98B6C00C36756 /* config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
+		D9375BE91BDA0F8F00981BF1 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		D9375BEA1BDA0F8F00981BF1 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		D9375BEB1BDA0F8F00981BF1 /* WebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewController.xib; sourceTree = "<group>"; };
+		D9375BF21BDA124C00981BF1 /* backword.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backword.png; sourceTree = "<group>"; };
+		D9375BF31BDA124C00981BF1 /* cross.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cross.png; sourceTree = "<group>"; };
+		D9375BF41BDA124C00981BF1 /* forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forward.png; sourceTree = "<group>"; };
 		D93BB57F1BA994CE0081386B /* Coop1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Coop1.jpg; sourceTree = "<group>"; };
 		D93BB5811BA995A70081386B /* Coop2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Coop2.jpg; sourceTree = "<group>"; };
 		D93BB5831BA996540081386B /* Coop3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Coop3.jpg; sourceTree = "<group>"; };
@@ -982,6 +1003,16 @@
 				D9C1B2441BA019A600E62331 /* Assets.xcassets */,
 			);
 			name = Coop;
+			sourceTree = "<group>";
+		};
+		D9375BE81BDA0F5600981BF1 /* NewsDetail */ = {
+			isa = PBXGroup;
+			children = (
+				D9375BE91BDA0F8F00981BF1 /* WebViewController.h */,
+				D9375BEA1BDA0F8F00981BF1 /* WebViewController.m */,
+				D9375BEB1BDA0F8F00981BF1 /* WebViewController.xib */,
+			);
+			name = NewsDetail;
 			sourceTree = "<group>";
 		};
 		D95396E51BA2D13C000B81BC /* Flavors */ = {
@@ -1378,6 +1409,7 @@
 		D9EA200F1BA144B70081A409 /* News */ = {
 			isa = PBXGroup;
 			children = (
+				D9375BE81BDA0F5600981BF1 /* NewsDetail */,
 				D9C1B2A41BA0594F00E62331 /* NewsViewController.h */,
 				D9C1B2A51BA0594F00E62331 /* NewsViewController.m */,
 				D9C1B2A61BA0594F00E62331 /* NewsViewController.xib */,
@@ -1405,6 +1437,9 @@
 				D9D949961BB019650006BFAC /* placeholder.png */,
 				D9EC89521BA2A8160058681A /* mobile_menu.png */,
 				D9EC89501BA2A6940058681A /* menu-icon.png */,
+				D9375BF21BDA124C00981BF1 /* backword.png */,
+				D9375BF31BDA124C00981BF1 /* cross.png */,
+				D9375BF41BDA124C00981BF1 /* forward.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -1711,6 +1746,7 @@
 				D95396CB1BA2D048000B81BC /* SVWebViewControllerActivityChrome-iPad.png in Resources */,
 				D95835011BD1123600653197 /* mcloudyrw.png in Resources */,
 				D95835701BD1123600653197 /* pm_pcloudyr.png in Resources */,
+				D9375BFC1BDA124C00981BF1 /* forward.png in Resources */,
 				D95835881BD1123600653197 /* raintosnow.png in Resources */,
 				D95835791BD1123600653197 /* pm_tstorm.png in Resources */,
 				D95835461BD1123600653197 /* pcloudysf.png in Resources */,
@@ -1721,12 +1757,14 @@
 				D95396CE1BA2D048000B81BC /* SVWebViewController.strings in Resources */,
 				D95835A91BD1123600653197 /* snown.png in Resources */,
 				D95835401BD1123600653197 /* pcloudyrwn.png in Resources */,
+				D9375BF01BDA0F8F00981BF1 /* WebViewController.xib in Resources */,
 				D95835AF1BD1123600653197 /* snowshowersn.png in Resources */,
 				D95835761BD1123600653197 /* pm_snowshowers.png in Resources */,
 				D95396CF1BA2D048000B81BC /* CropPricesTableViewCell.xib in Resources */,
 				D95834B31BD1123600653197 /* cloudyw.png in Resources */,
 				D95834D41BD1123600653197 /* fdrizzlen.png in Resources */,
 				D95835D61BD1123600653197 /* tstormsw.png in Resources */,
+				D9375BF61BDA124C00981BF1 /* backword.png in Resources */,
 				D958355B1BD1123600653197 /* pcloudyt.png in Resources */,
 				D95834D71BD1123600653197 /* flurries.png in Resources */,
 				D95396D11BA2D048000B81BC /* SVWebViewControllerActivityChrome-iPad@2x.png in Resources */,
@@ -1818,6 +1856,7 @@
 				D958357C1BD1123600653197 /* rain.png in Resources */,
 				D95834E01BD1123600653197 /* flurrieswn.png in Resources */,
 				D95835941BD1123600653197 /* showersn.png in Resources */,
+				D9375BF91BDA124C00981BF1 /* cross.png in Resources */,
 				D95834A71BD1123600653197 /* clearw.png in Resources */,
 				D958350D1BD1123600653197 /* mcloudysfw.png in Resources */,
 				D95834FE1BD1123600653197 /* mcloudyrn.png in Resources */,
@@ -1868,6 +1907,7 @@
 				D913DE1A1BA93BA500C36756 /* config.json in Resources */,
 				D95835021BD1123600653197 /* mcloudyrw.png in Resources */,
 				D95835711BD1123600653197 /* pm_pcloudyr.png in Resources */,
+				D9375BFD1BDA124C00981BF1 /* forward.png in Resources */,
 				D95835891BD1123600653197 /* raintosnow.png in Resources */,
 				D958357A1BD1123600653197 /* pm_tstorm.png in Resources */,
 				D95835471BD1123600653197 /* pcloudysf.png in Resources */,
@@ -1878,12 +1918,14 @@
 				D953973C1BA2D8F4000B81BC /* SVWebViewControllerActivityChrome-iPad.png in Resources */,
 				D95835AA1BD1123600653197 /* snown.png in Resources */,
 				D95835411BD1123600653197 /* pcloudyrwn.png in Resources */,
+				D9375BF11BDA0F8F00981BF1 /* WebViewController.xib in Resources */,
 				D95835B01BD1123600653197 /* snowshowersn.png in Resources */,
 				D95835771BD1123600653197 /* pm_snowshowers.png in Resources */,
 				D953973E1BA2D8F4000B81BC /* SVWebViewController.strings in Resources */,
 				D95834B41BD1123600653197 /* cloudyw.png in Resources */,
 				D95834D51BD1123600653197 /* fdrizzlen.png in Resources */,
 				D95835D71BD1123600653197 /* tstormsw.png in Resources */,
+				D9375BF71BDA124C00981BF1 /* backword.png in Resources */,
 				D958355C1BD1123600653197 /* pcloudyt.png in Resources */,
 				D95834D81BD1123600653197 /* flurries.png in Resources */,
 				D953973F1BA2D8F4000B81BC /* CropPricesTableViewCell.xib in Resources */,
@@ -1975,6 +2017,7 @@
 				D958357D1BD1123600653197 /* rain.png in Resources */,
 				D95834E11BD1123600653197 /* flurrieswn.png in Resources */,
 				D95835951BD1123600653197 /* showersn.png in Resources */,
+				D9375BFA1BDA124C00981BF1 /* cross.png in Resources */,
 				D95834A81BD1123600653197 /* clearw.png in Resources */,
 				D958350E1BD1123600653197 /* mcloudysfw.png in Resources */,
 				D95834FF1BD1123600653197 /* mcloudyrn.png in Resources */,
@@ -2032,15 +2075,19 @@
 				D9C1B2DD1BA0710500E62331 /* SVWebViewControllerActivityChrome-iPad.png in Resources */,
 				D9EC89531BA2A8160058681A /* mobile_menu.png in Resources */,
 				D9C1B2D91BA0710500E62331 /* SVWebViewController.strings in Resources */,
+				D9375BF81BDA124C00981BF1 /* cross.png in Resources */,
 				D9EA205B1BA158C10081A409 /* CropPricesTableViewCell.xib in Resources */,
 				D958351E1BD1123600653197 /* mcloudytn.png in Resources */,
 				D95835781BD1123600653197 /* pm_tstorm.png in Resources */,
 				D95834A31BD1123600653197 /* clearn.png in Resources */,
 				D95834D61BD1123600653197 /* flurries.png in Resources */,
 				D95835E41BD1123600653197 /* wintrymix.png in Resources */,
+				D9375BFB1BDA124C00981BF1 /* forward.png in Resources */,
 				D93BB5841BA996540081386B /* Coop3.jpg in Resources */,
+				D9375BF51BDA124C00981BF1 /* backword.png in Resources */,
 				D95835721BD1123600653197 /* pm_showers.png in Resources */,
 				D95834D31BD1123600653197 /* fdrizzlen.png in Resources */,
+				D9375BEF1BDA0F8F00981BF1 /* WebViewController.xib in Resources */,
 				D958350F1BD1123600653197 /* mcloudysfwn.png in Resources */,
 				D95834AF1BD1123600653197 /* cloudyn.png in Resources */,
 				D95835DB1BD1123600653197 /* tstormw.png in Resources */,
@@ -2208,6 +2255,7 @@
 				D95396B31BA2D048000B81BC /* AppDelegate.m in Sources */,
 				D95396B41BA2D048000B81BC /* LeftMenuTableViewCell.m in Sources */,
 				D95396B51BA2D048000B81BC /* main.m in Sources */,
+				D9375BED1BDA0F8F00981BF1 /* WebViewController.m in Sources */,
 				D95396B61BA2D048000B81BC /* SVModalWebViewController.m in Sources */,
 				D95396B81BA2D048000B81BC /* UIImageView+AFNetworking.m in Sources */,
 				D95396B91BA2D048000B81BC /* CropPricesViewController.m in Sources */,
@@ -2262,6 +2310,7 @@
 				D95397241BA2D8F4000B81BC /* AppDelegate.m in Sources */,
 				D95397251BA2D8F4000B81BC /* LeftMenuTableViewCell.m in Sources */,
 				D95397261BA2D8F4000B81BC /* main.m in Sources */,
+				D9375BEE1BDA0F8F00981BF1 /* WebViewController.m in Sources */,
 				D95397271BA2D8F4000B81BC /* SVModalWebViewController.m in Sources */,
 				D95397291BA2D8F4000B81BC /* UIImageView+AFNetworking.m in Sources */,
 				D953972A1BA2D8F4000B81BC /* CropPricesViewController.m in Sources */,
@@ -2316,6 +2365,7 @@
 				D9C1B23D1BA019A600E62331 /* AppDelegate.m in Sources */,
 				D9C1B2901BA01ECE00E62331 /* LeftMenuTableViewCell.m in Sources */,
 				D9C1B23A1BA019A600E62331 /* main.m in Sources */,
+				D9375BEC1BDA0F8F00981BF1 /* WebViewController.m in Sources */,
 				D9C1B2DA1BA0710500E62331 /* SVModalWebViewController.m in Sources */,
 				D9EA20471BA14E420081A409 /* UIImageView+AFNetworking.m in Sources */,
 				D9EA20551BA157920081A409 /* CropPricesViewController.m in Sources */,

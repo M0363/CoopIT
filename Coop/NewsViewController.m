@@ -15,6 +15,7 @@
 #import "AFNetworking.h"
 #import "MBProgressHUD.h"
 #import "UIKit+AFNetworking.h"
+#import "WebViewController.h"
 //#import "RSSParser.h"
 //#import "RSSItem.h"
 #import "GDataXMLNode.h"
@@ -312,15 +313,31 @@ NSDictionary *dict;
 //    
     NSURL *url = [NSURL URLWithString:linkStringArray[indexPath.row]];
     NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-        UIWebView *web = [[UIWebView alloc]initWithFrame:CGRectMake(0, 64, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
-    [web setDelegate:self];
-    [web loadRequest:requestObj];
-    [self.view addSubview:web];
+//        UIWebView *web = [[UIWebView alloc]initWithFrame:CGRectMake(0, 64, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+//    [web setDelegate:self];
+//    [web loadRequest:requestObj];
+//    [self.view addSubview:web];
 
 //   SVWebViewController * webCtrl = [[SVWebViewController alloc] initWithAddress:news_links_array[indexPath.row]];
 //       [self.navigationController pushViewController:web animated:YES];
     
+   
     
+    
+    
+    //    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    
+        WebViewController *webViewController=[[WebViewController alloc]initWithNibName:@"WebViewController" bundle:nil];
+        webViewController.theTitle = @"In News";
+         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        webViewController.requestObject = requestObj;
+        [self presentViewController:webViewController
+                           animated:YES
+                         completion:nil];
+            
+        
+
  }
 -(void)sendData:(NSDictionary *)dictionary{
     printf("Downloading Pankaj!\n");
