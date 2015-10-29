@@ -2,7 +2,7 @@
 //  NewsDetail.m
 //  Coop
 //
-//  Created by Pankaj Verma on 23/10/15.
+//  Created by Pankaj Verma on 26/10/15.
 //  Copyright © 2015 Pankaj Verma. All rights reserved.
 //
 

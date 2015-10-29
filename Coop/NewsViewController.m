@@ -49,8 +49,8 @@ NSDictionary *dict;
 #pragma mark - Retriving data fom the database
     AppDelegate *delegate = [UIApplication sharedApplication].delegate;
     NSManagedObjectContext *context = delegate.managedObjectContext;
-    NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"News"];
-   
+   // NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"News"];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"News"];
     NSMutableArray * result =  [[context executeFetchRequest:request error:NULL] mutableCopy];
     if (result) {
         dataArray = result;
@@ -204,17 +204,31 @@ NSDictionary *dict;
     }
     
     
-    
-    NSURL * imgUrl = [NSURL URLWithString:[dataArray[indexPath.row] valueForKey:@"image"]];
+    NSString *imageString = [dataArray[indexPath.row] valueForKey:@"image"];
+    NSURL * imgUrl = [NSURL URLWithString:imageString];
     NSURLRequest *request = [NSURLRequest requestWithURL:imgUrl];
+    NSString* theFileName = [[imageString lastPathComponent] stringByDeletingPathExtension];
+    
+    
+    NSString *filepath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    filepath = [filepath stringByAppendingString:theFileName];
+    BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:filepath];
+    if (fileExists) {
+        cell.news_image.image=[UIImage imageWithContentsOfFile:filepath];
+    }
+    else{
+    __weak NSString *weakFilePath = filepath;
     [cell.news_image setImageWithURLRequest:request
                            placeholderImage:[UIImage imageNamed:@"placeholder"]
                                     success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
                                         cell.news_image.image = image;
                                         printf("success download image\n");
+                                        NSData *imageData = UIImageJPEGRepresentation(image,0.3);
+                                        if(![imageData writeToFile:weakFilePath atomically:YES])
+                                            printf("could not save to directory\n");
                                     } failure:nil];
     
- 
+    }
     
 //    for (GDataXMLElement *news in newsChannel){
 //        for(GDataXMLElement *itemData in [news elementsForName:@"item"]){
@@ -345,7 +359,7 @@ NSDictionary *dict;
         WebViewController *webViewController=[[WebViewController alloc]initWithNibName:@"WebViewController" bundle:nil];
         webViewController.theTitle = @"In News";
          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-        webViewController.requestUrl = linkStringArray[indexPath.row];
+        webViewController.requestUrl = [dataArray[indexPath.row] valueForKey:@"link"];
         [self presentViewController:webViewController
                            animated:YES
                          completion:nil];
@@ -364,60 +378,105 @@ NSDictionary *dict;
     printf("in News\n");
     [HUD hide:YES];
       [self setTitle:@"Blog"];
-//    NSArray *itemArray = [newsData elementsForName:@"item"];
-//    for (GDataXMLElement *item  in itemArray) {
-//     GDataXMLElement *media = [[item elementsForName:@"media:thumbnail"] lastObject];
-//        [imageUrlStringArray addObject:[[media attributeForName:@"url"] stringValue]];
-//    [titleArray addObject: [[[item elementsForName:@"title"] lastObject] stringValue]];
-//    [linkStringArray addObject:[[[item elementsForName:@"link"] lastObject] stringValue]];
-//    [descriptionArray addObject:[[[item elementsForName:@"description"] lastObject] stringValue]];
-//    }
-//    [self.news_CollectionView reloadData];
     
-    
-    
-    
-    /*deleting data of the database */
     AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-    NSManagedObjectContext *context = delegate.managedObjectContext;
-    NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"News"];
-//    NSPredicate *p=[NSPredicate predicateWithFormat:@"category == %@", viewTitle];
-//    [request setPredicate:p];
-    NSBatchDeleteRequest *delete = [[NSBatchDeleteRequest alloc] initWithFetchRequest:request];
+    NSManagedObjectContext *contextD = delegate.managedObjectContext;
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"News"];
+    NSError *err = nil;
     
+     /*deleting data of the database since network is available */
     
-    NSError *deleteError = [[NSError alloc]init];
-    NSArray *itemArray = [newsData elementsForName:@"item"];
-    [context executeRequest:delete error:&deleteError];
-    itemArray = [newsData elementsForName:@"item"];
+    if (SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(@"8.4")) {
+        printf("Device has Lower iOS version\n");
+        [request setIncludesPropertyValues:NO];
+        NSArray *fetchedObjects = [contextD executeFetchRequest:request error:&err];
+        for (NSManagedObject *object in fetchedObjects)
+            [contextD deleteObject:object];
+    }
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"9.0")) {
+        printf("Device has updutaded iOS version\n");
+        NSBatchDeleteRequest *delete = [[NSBatchDeleteRequest alloc] initWithFetchRequest:request];
+        if ([contextD executeRequest:delete error:&err]) printf("could not delete.");
+    }
     
-    //    Saving data to the database
+    [contextD lock];
+    if (![contextD save:&err])  printf("could not save/delete .");
+    [contextD unlock];
     
-    NSEntityDescription *description = [NSEntityDescription entityForName:@"News" inManagedObjectContext:context];
-    
-    
+       /*   Saving Downloaded  data to the database */
+
+    NSEntityDescription *description = [NSEntityDescription entityForName:@"News" inManagedObjectContext:contextD];
+    NSArray* itemArray = [newsData elementsForName:@"item"];
     for ( GDataXMLElement *item in itemArray) {
-        NSManagedObject *obj = [[NSManagedObject alloc]initWithEntity:description insertIntoManagedObjectContext:context];
+        NSManagedObject *obj = [[NSManagedObject alloc]initWithEntity:description insertIntoManagedObjectContext:contextD];
         GDataXMLElement *media = [[item elementsForName:@"media:thumbnail"] lastObject];
         [obj setValue:[[[item elementsForName:@"title"] lastObject] stringValue] forKey:@"heading"];
         [obj setValue:[[media attributeForName:@"url"] stringValue] forKey:@"image"];
         [obj setValue:[[[item elementsForName:@"description"] lastObject] stringValue] forKey:@"article"];
-        [linkStringArray addObject:[[[item elementsForName:@"link"] lastObject] stringValue]];
-        NSError *err = nil;
-        if (![context save:&err]) {
-            printf("could not save.")   ;
-        }
+        [obj setValue:[[[item elementsForName:@"link"] lastObject] stringValue] forKey:@"link"];
+       
     }
+    [contextD lock];
+    if (![contextD save:&err]) printf("could not save.")   ;
+    [contextD unlock];
     
-    //Retriving data from the database
-    
-    NSMutableArray * result =  [[context executeFetchRequest:request error:NULL] mutableCopy];
-    
+    /* Retriving data from the database  */
+
+    NSMutableArray * result =  [[contextD executeFetchRequest:request error:NULL] mutableCopy];
     if (result.count > 0) {
+        dataArray = nil;
         dataArray = result;
     }
     else
         printf("couldn't fetch request");
+    
+    
+    //delete objects in NewsDetail entitie since network is available
+
+     NSFetchRequest *request1 = [NSFetchRequest fetchRequestWithEntityName:@"NewsDetail"];
+    
+    if (SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(@"8.4")) {
+        printf("Device has Lower iOS version\n");
+        [request1 setIncludesPropertyValues:NO];
+        NSArray *fetchedObjects = [contextD executeFetchRequest:request1 error:&err];
+        for (NSManagedObject *object in fetchedObjects)
+            [contextD deleteObject:object];
+    }
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"9.0")) {
+        printf("Device has updutaded iOS version\n");
+        NSBatchDeleteRequest *delete = [[NSBatchDeleteRequest alloc] initWithFetchRequest:request1];
+        if ([contextD executeRequest:delete error:&err]) printf("could not delete.");
+    }
+
+    [contextD lock];
+    if (![contextD save:&err])  printf("could not save/delete .");
+    [contextD unlock];
+   
+    // seve detailed url content in database
+    __weak NSMutableArray *weakLinkArray = dataArray;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+       // NSManagedObjectContext *contextOS = delegate.managedObjectContext;
+        NSEntityDescription *description = [NSEntityDescription entityForName:@"NewsDetail" inManagedObjectContext:contextD];
+        for (NSDictionary* linkD in weakLinkArray) {
+            NSString * linkStr = [linkD valueForKey:@"link"];
+            NSURL *requestURL = [NSURL URLWithString: linkStr];
+            NSString *html =  [NSString stringWithContentsOfURL:requestURL encoding:NSASCIIStringEncoding error:nil];
+            printf("\n\n html for  %s\n\n",[linkStr UTF8String]);
+            // save now new data
+            NSManagedObject *obj = [[NSManagedObject alloc]initWithEntity:description insertIntoManagedObjectContext:contextD];
+            [obj setValue: linkStr forKey:@"baseUrl"];
+//            if (!html) html = [NSString stringWithContentsOfFile:@"networkFail.html" encoding:NSASCIIStringEncoding error:nil];
+            [obj setValue: html forKey:@"html"];
+           
+        }
+        [contextD lock];
+        NSError *err = nil;
+        if (![contextD save:&err]) {
+            printf("could not save.")   ;
+        }
+        [contextD unlock];
+    });
+    
     [self.news_CollectionView reloadData];
 
 }
@@ -426,15 +485,9 @@ NSDictionary *dict;
     [HUD hide:YES];
     AppDelegate *delegate = [UIApplication sharedApplication].delegate;
     NSManagedObjectContext *context = delegate.managedObjectContext;
-    NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"News"];
-    NSBatchDeleteRequest *delete = [[NSBatchDeleteRequest alloc] initWithFetchRequest:request];
-    
-    NSError *deleteError = nil;
-    
-    [context executeRequest:delete error:&deleteError];
-    
+    //NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"News"];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"News"];
     NSMutableArray * result =  [[context executeFetchRequest:request error:NULL] mutableCopy];
-    
     if (result) {
         dataArray = result;
     }
@@ -442,4 +495,12 @@ NSDictionary *dict;
         printf("couldn't fetch request");
     [self.news_CollectionView reloadData];
 }
+
+
+
+
+
+
+
+
 @end

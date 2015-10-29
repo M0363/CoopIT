@@ -15,14 +15,16 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKShareKit/FBSDKShareDialog.h>
 #import "GlobalVariables.h"
+#import "AppDelegate.h"
+#import "Tweet.h"
 
 @interface TwitterChannelViewController ()
-@property (weak, nonatomic) IBOutlet UITableView *twitterTable;
-@property (strong, nonatomic) NSArray *twitterData;
+
+@property (strong, nonatomic) NSMutableArray *twitterData;
 @property (strong, nonatomic) NSArray *fbData;
-@property (strong, nonatomic) IBOutlet UIImageView *fbPostImage;
+@property (weak, nonatomic) IBOutlet UITableView *twitterTable;
 @property (weak, nonatomic) IBOutlet UIImageView *photo;
-@property (weak, nonatomic) IBOutlet UILabel *text;
+@property (weak, nonatomic) IBOutlet UILabel *textLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftSpace;
 @property (weak, nonatomic) IBOutlet UIView *theView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topSpace;
@@ -82,53 +84,48 @@
 
 
 -(void)showTweets:(NSTimer *)timer{
-    printf("timer = %ld\n",n);
-    NSDictionary *tweet = _twitterData[n++%_twitterData.count];
-    
-   void (^animateChangeWidth1)() = ^(){
-        CGRect frame = _text.frame;
-        frame.size = CGSizeMake(frame.size.width, frame.size.height-250);//mycell.intrinsicContentSize;
-        _photo.alpha = 0;
-       _time.alpha = 0;
-        _text.frame = frame;
-    };
 
-    void (^animateChangeWidth)() = ^()
-    {
-      
-        
-        NSDictionary *tempD = tweet[@"extended_entities"][@"media"][0];
-        _leftSpace.constant = 8;
-         _photo.alpha = 1.0;
-        _time.alpha = 1.0;
-        _photo.image = nil;
-        if (tempD.count > 0) {
-            _leftSpace.constant = 67;
-            
-            NSString *url = tempD[@"media_url"];
-            NSURL * imgUrl = [NSURL URLWithString:url];
-            NSURLRequest *request = [NSURLRequest requestWithURL:imgUrl];
-            [_photo setImageWithURLRequest:request
+     if (self.twitterData.count > 0) {
+         printf("timer = %ld\n",n);
+         NSDictionary *tweet = self.twitterData[n++%_twitterData.count];
+         void (^animateChangeWidth1)() = ^(){
+             CGRect frame = _textLabel.frame;
+             frame.size = CGSizeMake(frame.size.width, frame.size.height-250);
+             _photo.alpha = 0;
+             _time.alpha = 0;
+             _textLabel.frame = frame;
+         };
+
+         void (^animateChangeWidth)() = ^(){
+             _leftSpace.constant = 8;
+             _photo.alpha = 1.0;
+             _time.alpha = 1.0;
+             _photo.image = nil;
+             if ([tweet valueForKey:@"media"] ) {
+                 _leftSpace.constant = 67;
+                 NSString *url = [tweet valueForKey:@"media"];
+                 NSURL * imgUrl = [NSURL URLWithString:url];
+                 NSURLRequest *request = [NSURLRequest requestWithURL:imgUrl];
+                 [_photo setImageWithURLRequest:request
                           placeholderImage:[UIImage imageNamed:@"placeholder"]
                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                       
                                        _photo.image = image;
-                                       
                                    } failure:nil];
             
-        }
+             }
+             else printf("no media available\n");
         
 
-        _time.text = tweet[@"created_at"];
-        _text.text = tweet[@"text"];
-        CGRect frame = _text.frame;
-        frame.size = CGSizeMake(frame.size.width, frame.size.height+250);//mycell.intrinsicContentSize;
-        _text.frame = frame;
-    };
-    [UIView transitionWithView:_text duration:2.0f options:UIViewAnimationOptionCurveEaseInOut   animations:animateChangeWidth1 completion:
+             _time.text = [tweet valueForKey:@"time"];
+             _textLabel.text = [tweet valueForKey:@"tweets"];
+             CGRect frame = _textLabel.frame;
+             frame.size = CGSizeMake(frame.size.width, frame.size.height+250);//mycell.intrinsicContentSize;
+             _textLabel.frame = frame;
+         };
+         [UIView transitionWithView:_textLabel duration:2.0f options:UIViewAnimationOptionCurveEaseInOut   animations:animateChangeWidth1 completion:
      
      ^(BOOL finished) {
-         [UIView transitionWithView:_text duration:2.0f options:UIViewAnimationOptionCurveEaseInOut   animations:animateChangeWidth completion:nil];
+         [UIView transitionWithView:_textLabel duration:2.0f options:UIViewAnimationOptionCurveEaseInOut   animations:animateChangeWidth completion:nil];
          
                              }];
     
@@ -183,6 +180,7 @@
 //         NSLog(@"Completed");
 //         
 //     }];
+     }
 }
 -(void)tapForTwitter:(UITapGestureRecognizer *)tap{
     NSString *urlString = [GlobalVariables getTWITTER_URL];
@@ -205,9 +203,38 @@
     // Do any additional setup after loading the view from its nib.
     n = 0;
     self.view.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width,[[UIScreen mainScreen] bounds].size.height);
-  
+ 
     [self designTheView];
     [self designPhoto];
+    
+    // Load old tweets
+    //Retriving data from the database
+//    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+//    NSManagedObjectContext *context = delegate.managedObjectContext;
+//    NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"Tweet"];
+//    NSMutableArray * result =  [[context executeFetchRequest:request error:NULL] mutableCopy];
+//    
+//    if (result.count > 0) {
+//        self.twitterData = result;
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            
+//            [self showTweets:nil];
+//            NSTimer *t = [NSTimer scheduledTimerWithTimeInterval:10.0
+//                                                          target:self
+//                                                        selector:@selector(showTweets:)
+//                                                        userInfo:nil
+//                                                         repeats:YES];
+//            NSRunLoop *runner = [NSRunLoop currentRunLoop];
+//            [runner addTimer:t forMode: NSDefaultRunLoopMode];
+//            
+//            
+//        });
+
+   // }
+//    else
+//        printf("couldn't fetch request");
+
+    
     UITapGestureRecognizer *tapForTwitter =
     [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(tapForTwitter:)];
@@ -249,27 +276,108 @@
                   ^(NSData *responseData, NSHTTPURLResponse
                     *urlResponse, NSError *error)
                   {
-                      self.twitterData = [NSJSONSerialization
+                      if (error) {
+                          NSLog(@"Error ! :%@",error.localizedDescription);
+                          AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+                          NSManagedObjectContext *contextR = delegate.managedObjectContext;
+                          NSFetchRequest *requestR = [[NSFetchRequest alloc]initWithEntityName:@"Tweet"];
+                          NSMutableArray * result =  [[contextR executeFetchRequest:requestR error:NULL] mutableCopy];
+                          
+                          if (result.count > 0) {
+                              self.twitterData = result;
+                          }
+                          else
+                              printf("couldn't fetch request");
+                          dispatch_async(dispatch_get_main_queue(), ^{
+                              [self showTweets:nil];
+                          NSTimer* t =  [NSTimer scheduledTimerWithTimeInterval:5.0
+                                                                         target:self
+                                                                       selector:@selector(showTweets:)
+                                                                       userInfo:nil
+                                                                        repeats:YES];
+                          NSRunLoop *runner = [NSRunLoop currentRunLoop];
+                          [runner addTimer:t forMode: NSDefaultRunLoopMode];
+                          
+                          });
+                      
+                      
+
+                        }
+                        else{
+                            NSArray *tweets = [NSJSONSerialization
                                          JSONObjectWithData:responseData
                                          options:NSJSONReadingMutableLeaves
                                          error:&error];
                       
-                      if (self.twitterData.count != 0) {
-                          
-                          dispatch_async(dispatch_get_main_queue(), ^{
-                           //   [self.twitterTable reloadData];
-                              [self showTweets:nil];
-                              NSTimer *t = [NSTimer scheduledTimerWithTimeInterval:10.0
-                                                                            target:self
-                                                                          selector:@selector(showTweets:)
-                                                                          userInfo:nil
-                                                                           repeats:YES];
-                              NSRunLoop *runner = [NSRunLoop currentRunLoop];
-                             [runner addTimer:t forMode: NSDefaultRunLoopMode];
-                              
+                            AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+                             // seve here in data base
+                         //   if (tweets.count!= 0) {
+                                
+                                NSManagedObjectContext *context = delegate.managedObjectContext;
+                                NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"Tweet"];
+                                NSBatchDeleteRequest *delete = [[NSBatchDeleteRequest alloc] initWithFetchRequest:request];
+                                NSError *deleteError = [[NSError alloc]init];
+                                [context executeRequest:delete error:&deleteError];
+                                [context save:&error];
+                               
+                           // }
+                                //    Saving data to the database
+                                
+                               
+                            
+                            NSManagedObjectContext *contextS = delegate.managedObjectContext;
+                            NSEntityDescription *description = [NSEntityDescription entityForName:@"Tweet" inManagedObjectContext:contextS];
 
-                          });
-                      }
+                           
+                                for ( NSDictionary *item in tweets) {
+                                     NSManagedObject *obj = [[NSManagedObject alloc]initWithEntity:description insertIntoManagedObjectContext:contextS];
+                                   NSString *mediaUrl = item[@"extended_entities"][@"media"][0][@"media_url"];
+                                    NSString *tweetText = item[@"text"];
+                                    NSString *tweetTime = item[@"created_at"];
+                                    [obj setValue:tweetText forKey:@"tweets"];
+                                    [obj setValue:tweetTime forKey:@"time"];
+                                    [obj setValue:mediaUrl forKey:@"media"];
+                                   // printf("%s %s %s\n",[tweetText UTF8String],[tweetTime UTF8String],[mediaUrl UTF8String]);
+                                                                   }
+                           
+                            NSError *err = nil;
+                            if (![contextS save:&err])  printf("could not save.")   ;
+
+                            //Retriving data from the database
+                             NSManagedObjectContext *contextR = delegate.managedObjectContext;
+                                NSFetchRequest *requestR = [[NSFetchRequest alloc]initWithEntityName:@"Tweet"];
+                                NSMutableArray * result =  [[contextR executeFetchRequest:requestR error:NULL] mutableCopy];
+                                
+                                if (result.count > 0) {
+                                    self.twitterData = result;
+                                }
+                                else
+                                    printf("couldn't fetch request");
+                            
+                                
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    
+                                    [self showTweets:nil];
+//                                    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+//                                    NSManagedObjectContext *context = delegate.managedObjectContext;
+//                                    NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"Tweet"];
+//                                    NSMutableArray * result =  [[context executeFetchRequest:request error:NULL] mutableCopy];
+//                                    self.twitterData = result;
+                                   NSTimer* t =  [NSTimer scheduledTimerWithTimeInterval:5.0
+                                                                                  target:self
+                                                                                selector:@selector(showTweets:)
+                                                                                userInfo:nil
+                                                                                 repeats:YES];
+                                    NSRunLoop *runner = [NSRunLoop currentRunLoop];
+                                    [runner addTimer:t forMode: NSDefaultRunLoopMode];
+                            
+                                    
+                               });
+
+                                
+                                
+                              }
+                      
                   }];
              }
          } else {

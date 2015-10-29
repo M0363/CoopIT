@@ -2,7 +2,7 @@
 //  Tweet+CoreDataProperties.m
 //  Coop
 //
-//  Created by Pankaj Verma on 23/10/15.
+//  Created by Pankaj Verma on 26/10/15.
 //  Copyright © 2015 Pankaj Verma. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -13,6 +13,8 @@
 
 @implementation Tweet (CoreDataProperties)
 
-@dynamic tweet;
+@dynamic tweets;
+@dynamic time;
+@dynamic media;
 
 @end

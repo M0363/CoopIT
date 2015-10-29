@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TwitterChannelViewController">
             <connections>
                 <outlet property="leftSpace" destination="HeV-qV-zVi" id="IgT-sG-ISD"/>
                 <outlet property="photo" destination="SSW-yy-ac9" id="T7G-bv-v4v"/>
-                <outlet property="text" destination="jFK-o8-Uoq" id="vv5-g3-zu2"/>
+                <outlet property="textLabel" destination="jFK-o8-Uoq" id="SDV-c1-06c"/>
                 <outlet property="theView" destination="RgY-wK-bIg" id="IWz-Ij-bJ2"/>
                 <outlet property="time" destination="Ko3-zp-Zgg" id="Yrw-Zc-JIJ"/>
                 <outlet property="topSpace" destination="mUy-bk-1Zj" id="IDG-Uq-ALM"/>
@@ -62,25 +63,25 @@
                         <constraint firstAttribute="trailing" secondItem="Ko3-zp-Zgg" secondAttribute="trailing" constant="8" id="r8o-BX-g6P"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9CO-OU-C2U">
-                    <rect key="frame" x="548" y="192" width="44" height="44"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9CO-OU-C2U">
+                    <rect key="frame" x="536" y="200" width="44" height="44"/>
                     <animations/>
-                    <state key="normal" image="twitterIcon"/>
+                    <state key="normal" backgroundImage="twitterIcon"/>
                     <connections>
                         <action selector="twitterButtonClicked:" destination="-1" eventType="touchUpInside" id="MAR-CP-oau"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Share" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hI6-2r-n6E">
-                    <rect key="frame" x="455" y="192" width="33" height="15"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hI6-2r-n6E">
+                    <rect key="frame" x="443" y="204" width="33" height="15"/>
                     <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" red="0.73978855300000002" green="0.11654143860000001" blue="0.091664678949999995" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NFR-ja-6qJ">
-                    <rect key="frame" x="496" y="192" width="44" height="44"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NFR-ja-6qJ">
+                    <rect key="frame" x="484" y="200" width="44" height="44"/>
                     <animations/>
-                    <state key="normal" image="fbIcon"/>
+                    <state key="normal" backgroundImage="fbIcon"/>
                     <connections>
                         <action selector="fbButtonClicked:" destination="-1" eventType="touchUpInside" id="4hx-9w-Lvx"/>
                     </connections>
@@ -91,14 +92,15 @@
             <constraints>
                 <constraint firstItem="RgY-wK-bIg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="0pk-02-Ztx"/>
                 <constraint firstItem="NFR-ja-6qJ" firstAttribute="leading" secondItem="hI6-2r-n6E" secondAttribute="trailing" constant="8" id="42i-QX-A7G"/>
-                <constraint firstItem="NFR-ja-6qJ" firstAttribute="top" secondItem="RgY-wK-bIg" secondAttribute="bottom" constant="8" id="TDV-D1-Eik"/>
+                <constraint firstItem="NFR-ja-6qJ" firstAttribute="top" secondItem="RgY-wK-bIg" secondAttribute="bottom" constant="16" id="TDV-D1-Eik"/>
                 <constraint firstItem="9CO-OU-C2U" firstAttribute="leading" secondItem="NFR-ja-6qJ" secondAttribute="trailing" constant="8" id="XZq-DQ-prJ"/>
                 <constraint firstAttribute="trailing" secondItem="RgY-wK-bIg" secondAttribute="trailing" constant="8" id="aob-R6-7gg"/>
-                <constraint firstAttribute="trailing" secondItem="9CO-OU-C2U" secondAttribute="trailing" constant="8" id="dJz-Eh-HDl"/>
-                <constraint firstItem="9CO-OU-C2U" firstAttribute="top" secondItem="RgY-wK-bIg" secondAttribute="bottom" constant="8" id="dci-ya-1eI"/>
-                <constraint firstItem="hI6-2r-n6E" firstAttribute="top" secondItem="RgY-wK-bIg" secondAttribute="bottom" constant="8" id="diE-V2-gnB"/>
+                <constraint firstAttribute="trailing" secondItem="9CO-OU-C2U" secondAttribute="trailing" constant="20" id="dJz-Eh-HDl"/>
+                <constraint firstItem="9CO-OU-C2U" firstAttribute="top" secondItem="RgY-wK-bIg" secondAttribute="bottom" constant="16" id="dci-ya-1eI"/>
+                <constraint firstItem="hI6-2r-n6E" firstAttribute="top" secondItem="RgY-wK-bIg" secondAttribute="bottom" constant="20" id="diE-V2-gnB"/>
                 <constraint firstItem="RgY-wK-bIg" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="mUy-bk-1Zj"/>
             </constraints>
+            <point key="canvasLocation" x="55" y="171"/>
         </view>
     </objects>
     <resources>

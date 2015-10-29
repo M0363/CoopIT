@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface WebViewController : UIViewController
+#import "BaseViewController.h"
+@interface WebViewController : BaseViewController
 
 
 @property (weak, nonatomic) IBOutlet UIWebView *webDetailView;

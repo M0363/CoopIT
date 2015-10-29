@@ -10,8 +10,9 @@
 #import "AppDelegate.h"
 
 
-@interface WebViewController ()<UIWebViewDelegate>
+@interface WebViewController ()<UIWebViewDelegate,UIAlertViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UIButton *crossButton;
 
 @property (weak, nonatomic) IBOutlet UIButton *farwordButton;
 @property (weak, nonatomic) IBOutlet UIButton *backwordButton;
@@ -24,66 +25,44 @@
     [super viewDidLoad];
     _webTitle.text = _theTitle;
     _webDetailView.delegate = self;
-  
+  _crossButton.imageEdgeInsets = UIEdgeInsetsMake(-10, -10, -10, -10);
     NSURL *requestURL = [NSURL URLWithString:_requestUrl];
     
-   // [self.webDetailView loadRequest:[NSURLRequest requestWithURL:requestURL]];
-    __block NSError *error;
-    __block NSString *page;
-  //  NSString *html = [self.webDetailView stringByEvaluatingJavaScriptFromString: @"document.body.innerHTML"];
-    NSString *html =  [NSString stringWithContentsOfURL:requestURL encoding:NSASCIIStringEncoding error:&error];
+   
 
-    // delete data from database
-    
+   //Retriving data from the database
     AppDelegate *delegate = [UIApplication sharedApplication].delegate;
     NSManagedObjectContext *context = delegate.managedObjectContext;
     NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"NewsDetail"];
-    if (html != nil) {
             NSPredicate *p=[NSPredicate predicateWithFormat:@"baseUrl == %@", _requestUrl];
            [request setPredicate:p];
-        NSBatchDeleteRequest *delete = [[NSBatchDeleteRequest alloc] initWithFetchRequest:request];
-        
-        
-        NSError *deleteError = [[NSError alloc]init];
-        
-        [context executeRequest:delete error:&deleteError];
-    }
     
-    
-    //    Saving data to the database
-    
-    NSEntityDescription *description = [NSEntityDescription entityForName:@"NewsDetail" inManagedObjectContext:context];
-    
-    
-   
-        NSManagedObject *obj = [[NSManagedObject alloc]initWithEntity:description insertIntoManagedObjectContext:context];
-        [obj setValue: html forKey:@"html"];
-        [obj setValue:_requestUrl forKey:@"baseUrl"];
-               NSError *err = nil;
-        if (![context save:&err]) {
-            printf("could not save.")   ;
-        }
-   
-    
-    //Retriving data from the database
-    
-    NSMutableArray * result =  [[context executeFetchRequest:request error:NULL] mutableCopy];
-    
+    NSError *err = nil;
+    NSMutableArray * result =  [[context executeFetchRequest:request error:&err] mutableCopy];
+    NSLog(@"Error ! :%@",err.localizedDescription);
     if (result.count > 0) {
-       [self.webDetailView loadHTMLString:[result[0] valueForKey:@"html"] baseURL:requestURL]; ;
+        NSString *htmlStr = [result[0] valueForKey:@"html"];
+        
+        if (htmlStr) [self.webDetailView loadHTMLString:htmlStr baseURL:requestURL];
+        else {
+            if (![super connected]) {
+                printf("not connected\n");
+                // not connected
+                NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"networkFail" ofType:@"html"];
+                NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
+                NSURL *baseURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
+                [self.webDetailView loadHTMLString:htmlString baseURL:baseURL];
+            } else {
+                printf(" connected\n");
+                [self.webDetailView loadRequest:[NSURLRequest requestWithURL:requestURL]];
+                    }
+
+        }
     }
-    else
+    else{ // could occer if application is closed before downloading
         printf("couldn't fetch request");
-   
-    
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-    page = [NSString stringWithContentsOfURL:requestURL
-                                              encoding:NSASCIIStringEncoding
-                                                 error:&error];
-        //[self.webDetailView loadHTMLString:page baseURL:requestURL];
-    });
-    
+    [self.webDetailView loadRequest:[NSURLRequest requestWithURL:requestURL]];
+    }
  }
 
 - (void)didReceiveMemoryWarning {
@@ -146,4 +125,10 @@
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     
 }
+#pragma mark - AlertView delegate
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 @end
