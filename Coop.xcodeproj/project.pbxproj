@@ -577,6 +577,9 @@
 		D95835E71BD1123600653197 /* wintrymixn.png in Resources */ = {isa = PBXBuildFile; fileRef = D958347B1BD1123600653197 /* wintrymixn.png */; };
 		D95835E81BD1123600653197 /* wintrymixn.png in Resources */ = {isa = PBXBuildFile; fileRef = D958347B1BD1123600653197 /* wintrymixn.png */; };
 		D95835E91BD1123600653197 /* wintrymixn.png in Resources */ = {isa = PBXBuildFile; fileRef = D958347B1BD1123600653197 /* wintrymixn.png */; };
+		D959E5381BE21E48000DDB93 /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D959E5371BE21E48000DDB93 /* DownloadManager.m */; };
+		D959E5391BE21E48000DDB93 /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D959E5371BE21E48000DDB93 /* DownloadManager.m */; };
+		D959E53A1BE21E48000DDB93 /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D959E5371BE21E48000DDB93 /* DownloadManager.m */; };
 		D96B60EE1BA706880039FA1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D95397591BA2D9BF000B81BC /* Assets.xcassets */; };
 		D96B60F21BA706960039FA1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D95396FB1BA2D6AD000B81BC /* Assets.xcassets */; };
 		D9C1B23A1BA019A600E62331 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D9C1B2391BA019A600E62331 /* main.m */; };
@@ -862,6 +865,10 @@
 		D95834791BD1123600653197 /* wind.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wind.png; sourceTree = "<group>"; };
 		D958347A1BD1123600653197 /* wintrymix.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wintrymix.png; sourceTree = "<group>"; };
 		D958347B1BD1123600653197 /* wintrymixn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wintrymixn.png; sourceTree = "<group>"; };
+		D959E5341BE1F355000DDB93 /* WeatherHTTPClientDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherHTTPClientDelegate.h; sourceTree = "<group>"; };
+		D959E5351BE21C6E000DDB93 /* NewsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsDelegate.h; sourceTree = "<group>"; };
+		D959E5361BE21E48000DDB93 /* DownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadManager.h; sourceTree = "<group>"; };
+		D959E5371BE21E48000DDB93 /* DownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadManager.m; sourceTree = "<group>"; };
 		D9C1B2351BA019A600E62331 /* COOP_IT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = COOP_IT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9C1B2391BA019A600E62331 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D9C1B23B1BA019A600E62331 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1297,11 +1304,15 @@
 			children = (
 				D95834011BD1123600653197 /* Aeris_WxIcons_55x55 */,
 				D913DE0F1BA93B7B00C36756 /* AppConfig.h */,
-				D913DE101BA93B7B00C36756 /* GlobalVariables.h */,
 				D913DE111BA93B7B00C36756 /* AppConfig.m */,
+				D913DE101BA93B7B00C36756 /* GlobalVariables.h */,
 				D913DE121BA93B7B00C36756 /* GlobalVariables.m */,
 				D90A86E51BAC305F00ADA402 /* WeatherHTTPClient.h */,
 				D90A86E61BAC305F00ADA402 /* WeatherHTTPClient.m */,
+				D959E5341BE1F355000DDB93 /* WeatherHTTPClientDelegate.h */,
+				D959E5351BE21C6E000DDB93 /* NewsDelegate.h */,
+				D959E5361BE21E48000DDB93 /* DownloadManager.h */,
+				D959E5371BE21E48000DDB93 /* DownloadManager.m */,
 				D95396E51BA2D13C000B81BC /* Flavors */,
 				D9EA20111BA148880081A409 /* Images */,
 				D9EA20101BA148570081A409 /* Frameworks */,
@@ -2354,6 +2365,7 @@
 				D95396AD1BA2D048000B81BC /* AFURLSessionManager.m in Sources */,
 				D9375C011BDA398C00981BF1 /* CoopDM.xcdatamodeld in Sources */,
 				D95396AF1BA2D048000B81BC /* AFNetworkReachabilityManager.m in Sources */,
+				D959E5391BE21E48000DDB93 /* DownloadManager.m in Sources */,
 				D91353121BDE38C5000DFE18 /* Weather.m in Sources */,
 				D95396B01BA2D048000B81BC /* AFURLResponseSerialization.m in Sources */,
 				D95396B21BA2D048000B81BC /* AFURLRequestSerialization.m in Sources */,
@@ -2419,6 +2431,7 @@
 				D953971E1BA2D8F4000B81BC /* AFURLSessionManager.m in Sources */,
 				D9375C021BDA398C00981BF1 /* CoopDM.xcdatamodeld in Sources */,
 				D95397201BA2D8F4000B81BC /* AFNetworkReachabilityManager.m in Sources */,
+				D959E53A1BE21E48000DDB93 /* DownloadManager.m in Sources */,
 				D91353131BDE38C5000DFE18 /* Weather.m in Sources */,
 				D95397211BA2D8F4000B81BC /* AFURLResponseSerialization.m in Sources */,
 				D95397231BA2D8F4000B81BC /* AFURLRequestSerialization.m in Sources */,
@@ -2484,6 +2497,7 @@
 				D9EA20421BA14E420081A409 /* AFURLSessionManager.m in Sources */,
 				D9375C001BDA398C00981BF1 /* CoopDM.xcdatamodeld in Sources */,
 				D9EA203D1BA14E420081A409 /* AFNetworkReachabilityManager.m in Sources */,
+				D959E5381BE21E48000DDB93 /* DownloadManager.m in Sources */,
 				D91353111BDE38C5000DFE18 /* Weather.m in Sources */,
 				D9EA20411BA14E420081A409 /* AFURLResponseSerialization.m in Sources */,
 				D9EA20401BA14E420081A409 /* AFURLRequestSerialization.m in Sources */,

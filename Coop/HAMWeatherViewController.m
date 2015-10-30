@@ -9,10 +9,10 @@
 #import "HAMWeatherViewController.h"
 //#import "WeatherData.h"
 #import "GlobalVariables.h"
-//#import "AppConfig.h"
 #import "AFNetworking.h"
 #import "UIKit+AFNetworking.h"
 #import "MBProgressHUD.h"
+#import "DownloadManager.h"
 @interface HAMWeatherViewController ()
 
 @end
@@ -25,6 +25,8 @@ NSDictionary *weatherData ;
 }
 static NSString *place;
 static WeatherHTTPClient *client;
+static NSString * const WorldWeatherOnlineURLString1 = @"http://api.aerisapi.com/forecasts/";
+//[NSURL URLWithString:WorldWeatherOnlineURLString1]
 //NSArray *locationImg;
 //NSArray *location;
 - (void)viewDidLoad {
@@ -40,18 +42,21 @@ static WeatherHTTPClient *client;
 //    NSString *urlString = [GlobalVariables getURL];
 //    NSString *theURLString = [NSString stringWithFormat:@"%@%@",baseString,urlString];
     //NSURL *url = [NSURL URLWithString:str];
+    place = @"delhi,india";
+    [DownloadManager sharedInstance].weatherDelegate = self;
+    [[DownloadManager sharedInstance] getWeatherAtPlace:place
+                                fromUrl:[NSURL URLWithString:WorldWeatherOnlineURLString1]
+                                withParameters:nil];
     
-   // [AppConfig sharedInstance].weatherDelegate = self;
-    //[[AppConfig sharedInstance]downloadFromURL:url];
     client = [WeatherHTTPClient sharedWeatherHTTPClient];
     client.delegate = self;
-    place = @"delhi,india";
+    
     double your_latitiude_value = 8.391916;
     double your_longitude_value = 77.094315;
     
     CLLocation *myLocation = [[CLLocation alloc] initWithLatitude:your_latitiude_value longitude:your_longitude_value];
     
-    [client updateWeatherAtLocation:place forNumberOfDays:5];
+   // [client updateWeatherAtLocation:place forNumberOfDays:5];
 
     HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:HUD];
@@ -219,11 +224,44 @@ static WeatherHTTPClient *client;
     
     WeatherHTTPClient *client = [WeatherHTTPClient sharedWeatherHTTPClient];
     client.delegate = self;
-    [client updateWeatherAtLocation:place forNumberOfDays:5];
+    //[client updateWeatherAtLocation:place forNumberOfDays:5];
+    [[DownloadManager sharedInstance] getWeatherAtPlace:place
+                                          fromUrl:[NSURL URLWithString:WorldWeatherOnlineURLString1]
+                                   withParameters:nil];
+
 }
 
 #pragma mark - WeatherHTTPClientDelegate
+-(void)updateWeather:(id)weather{
+    
+    [HUD hide:YES];
+    weatherData = weather;
+    if ([[weatherData objectForKey:@"success"] boolValue]) {
+        weatherData = weather;
+        NSArray *responce = [weatherData objectForKey:@"response"];
+        NSDictionary *profile = [responce[0] objectForKey:@"profile"];
+        place = profile[@"tz"];
+        //self.title = @"API Updated";
+        [weatherTable reloadData];
+        
+    }else {
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[weatherData objectForKey:@"error"][@"code"]
+                                                            message:[weatherData objectForKey:@"error"][@"description"]
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+    }
 
+}
+-(void)errorWhileUpdating:(NSError *)error{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Retrieving Weather"
+                                                        message:[NSString stringWithFormat:@"%@",error]
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alertView show];
+
+}
 - (void)weatherHTTPClient:(WeatherHTTPClient *)client didUpdateWithWeather:(id)weather
 {
     [HUD hide:YES];
@@ -254,12 +292,6 @@ static WeatherHTTPClient *client;
     [alertView show];
 }
 
-//-(void)getWeatherData:(NSDictionary *)dictionary{
-//    printf("Downloading Pankaj!\n");
-//    [HUD hide:YES];
-//    weatherData = dictionary;
-//    [weatherTable reloadData];
-//}
 
 
 -(void)hideKeyboard:(UITapGestureRecognizer *)tap{
@@ -277,7 +309,11 @@ static WeatherHTTPClient *client;
     place = sBar.text;
    NSString *placeEdited = [NSString stringWithFormat:@"%@,",sBar.text];
     NSLog(@"GO : %@", searchBar.text);
-    [client updateWeatherAtLocation:placeEdited forNumberOfDays:5];
+    // [client updateWeatherAtLocation:placeEdited forNumberOfDays:5];
+    [[DownloadManager sharedInstance] getWeatherAtPlace:placeEdited
+                                          fromUrl:[NSURL URLWithString:WorldWeatherOnlineURLString1]
+                                   withParameters:nil];
+
     [HUD show:YES];
 }
 

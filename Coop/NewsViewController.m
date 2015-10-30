@@ -11,7 +11,7 @@
 #import  "SVWebViewController.h"
 #import "MFSideMenu.h"
 #import "GlobalVariables.h"
-#import "AppConfig.h"
+#import "DownloadManager.h"
 #import "AFNetworking.h"
 #import "MBProgressHUD.h"
 #import "UIKit+AFNetworking.h"
@@ -21,7 +21,7 @@
 //#import "RSSItem.h"
 #import "GDataXMLNode.h"
 #import "GDataXMLElement-Extras.h"
-@interface NewsViewController ()<myProto>
+@interface NewsViewController ()<NewsDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *news_CollectionView;
 
 
@@ -74,8 +74,9 @@ NSDictionary *dict;
        // NSString *urlString = [GlobalVariables getURL];
         //NSString *theURLString = [NSString stringWithFormat:@"%@%@",baseString,urlString];
         NSURL *url = [NSURL URLWithString:baseString];
-        [AppConfig sharedInstance].delegate = self;
-    [[AppConfig sharedInstance] getFromURL:url withParameters:nil];
+        [DownloadManager sharedInstance].delegate = self;
+    [[DownloadManager sharedInstance] getFromURL:url withParameters:nil];
+    //[self downloadUrl:url withParameters :nil];
       //  [[AppConfig sharedInstance]downloadFromURL:url];
    // [[AppConfig sharedInstance] getFromURL:url withParameters:nil];
     HUD = [[MBProgressHUD alloc] initWithView:self.view];
@@ -497,9 +498,24 @@ NSDictionary *dict;
 }
 
 
+-(void)downloadUrl:(NSURL *)url withParameters :(NSDictionary *)param{
+NSURLRequest *request = [NSURLRequest requestWithURL:url];
+AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
 
+[operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+    printf("successed\n");
+    NSData *data = (NSData *)responseObject;
+    GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:data                                                       options:0 error:nil];
+    GDataXMLElement *channel = [[doc.rootElement elementsForName:@"channel"] lastObject];
+   [self getNewsData:channel];
+}
+                                 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                    [self ErrorNewsData];
+                                     printf("something went wrong\n");
+                                 }];
+[operation start];
 
-
+}
 
 
 

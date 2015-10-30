@@ -33,6 +33,7 @@
 
 @implementation TwitterChannelViewController{
     NSInteger n;
+    NSTimer* timer;
 }
 
 
@@ -198,6 +199,10 @@
    
 
 }
+-(void)viewDidDisappear:(BOOL)animated{
+    [timer invalidate];
+    printf("time stopped. \n");
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -234,7 +239,12 @@
 //    else
 //        printf("couldn't fetch request");
 
-    
+    timer =  [NSTimer scheduledTimerWithTimeInterval:5.0
+                                              target:self
+                                            selector:@selector(showTweets:)
+                                            userInfo:nil
+                                             repeats:YES];
+
     UITapGestureRecognizer *tapForTwitter =
     [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(tapForTwitter:)];
@@ -290,13 +300,8 @@
                               printf("couldn't fetch request");
                           dispatch_async(dispatch_get_main_queue(), ^{
                               [self showTweets:nil];
-                          NSTimer* t =  [NSTimer scheduledTimerWithTimeInterval:5.0
-                                                                         target:self
-                                                                       selector:@selector(showTweets:)
-                                                                       userInfo:nil
-                                                                        repeats:YES];
-                          NSRunLoop *runner = [NSRunLoop currentRunLoop];
-                          [runner addTimer:t forMode: NSDefaultRunLoopMode];
+                                                    NSRunLoop *runner = [NSRunLoop currentRunLoop];
+                          [runner addTimer:timer forMode: NSDefaultRunLoopMode];
                           
                           });
                       
@@ -310,27 +315,40 @@
                                          error:&error];
                       
                             AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-                             // seve here in data base
-                         //   if (tweets.count!= 0) {
-                                
-                                NSManagedObjectContext *context = delegate.managedObjectContext;
-                                NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"Tweet"];
-                                NSBatchDeleteRequest *delete = [[NSBatchDeleteRequest alloc] initWithFetchRequest:request];
-                                NSError *deleteError = [[NSError alloc]init];
-                                [context executeRequest:delete error:&deleteError];
-                                [context save:&error];
-                               
-                           // }
-                                //    Saving data to the database
-                                
-                               
+                            NSManagedObjectContext *context = delegate.managedObjectContext;
+                            NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"Tweet"];
+                             NSError *err= nil;
                             
-                            NSManagedObjectContext *contextS = delegate.managedObjectContext;
-                            NSEntityDescription *description = [NSEntityDescription entityForName:@"Tweet" inManagedObjectContext:contextS];
+                             // delete old tweets since network is available
+                      
+                            if (SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(@"8.4")) {
+                                printf("Device has Lower iOS version\n");
+                                [request setIncludesPropertyValues:NO];
+                                NSArray *fetchedObjects = [context executeFetchRequest:request error:&err];
+                                for (NSManagedObject *object in fetchedObjects)
+                                    [context deleteObject:object];
+                            }
+                            if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"9.0")) {
+                                printf("Device has updutaded iOS version\n");
+                                NSBatchDeleteRequest *delete = [[NSBatchDeleteRequest alloc] initWithFetchRequest:request];
+                                if ([context executeRequest:delete error:&err]) printf("Error :%s",[[err localizedDescription] UTF8String]);
+                            }
+
+                            
+                            [context lock];
+                            if (![context save:&err])  printf("could not save/delete .");
+                            [context unlock];
+
+                            
+                            //    Saving data to the database
+                                
+                               
+                 
+                            NSEntityDescription *description = [NSEntityDescription entityForName:@"Tweet" inManagedObjectContext:context];
 
                            
                                 for ( NSDictionary *item in tweets) {
-                                     NSManagedObject *obj = [[NSManagedObject alloc]initWithEntity:description insertIntoManagedObjectContext:contextS];
+                                     NSManagedObject *obj = [[NSManagedObject alloc]initWithEntity:description insertIntoManagedObjectContext:context];
                                    NSString *mediaUrl = item[@"extended_entities"][@"media"][0][@"media_url"];
                                     NSString *tweetText = item[@"text"];
                                     NSString *tweetTime = item[@"created_at"];
@@ -339,14 +357,15 @@
                                     [obj setValue:mediaUrl forKey:@"media"];
                                    // printf("%s %s %s\n",[tweetText UTF8String],[tweetTime UTF8String],[mediaUrl UTF8String]);
                                                                    }
-                           
-                            NSError *err = nil;
-                            if (![contextS save:&err])  printf("could not save.")   ;
+                            
+                            [context lock];
+                            if (![context save:&err])  printf("could not save/delete .");
+                            [context unlock];
 
-                            //Retriving data from the database
-                             NSManagedObjectContext *contextR = delegate.managedObjectContext;
-                                NSFetchRequest *requestR = [[NSFetchRequest alloc]initWithEntityName:@"Tweet"];
-                                NSMutableArray * result =  [[contextR executeFetchRequest:requestR error:NULL] mutableCopy];
+                            //Retriving tweets from the database
+                         
+                            
+                                NSMutableArray * result =  [[context executeFetchRequest:request error:NULL] mutableCopy];
                                 
                                 if (result.count > 0) {
                                     self.twitterData = result;
@@ -354,23 +373,11 @@
                                 else
                                     printf("couldn't fetch request");
                             
-                                
+                                // start timer
                                 dispatch_async(dispatch_get_main_queue(), ^{
-                                    
                                     [self showTweets:nil];
-//                                    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-//                                    NSManagedObjectContext *context = delegate.managedObjectContext;
-//                                    NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"Tweet"];
-//                                    NSMutableArray * result =  [[context executeFetchRequest:request error:NULL] mutableCopy];
-//                                    self.twitterData = result;
-                                   NSTimer* t =  [NSTimer scheduledTimerWithTimeInterval:5.0
-                                                                                  target:self
-                                                                                selector:@selector(showTweets:)
-                                                                                userInfo:nil
-                                                                                 repeats:YES];
                                     NSRunLoop *runner = [NSRunLoop currentRunLoop];
-                                    [runner addTimer:t forMode: NSDefaultRunLoopMode];
-                            
+                                    [runner addTimer:timer forMode: NSDefaultRunLoopMode];
                                     
                                });
 
@@ -384,189 +391,8 @@
              // Handle failure to get account access
          }
      }];
-    
-    
-    
-//    ACAccountStore *account = [[ACAccountStore alloc] init];
-//    ACAccountType *accountType = [account
-//                                  accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
-//    NSDictionary *options = @{
-//                              ACFacebookAppIdKey: @"716505388483428",
-//                              ACFacebookPermissionsKey: @[@"publish_stream"],
-//                              ACFacebookAudienceKey: ACFacebookAudienceEveryone
-//                              };
-//    [account requestAccessToAccountsWithType:accountType
-//                                     options:options completion:^(BOOL granted, NSError *error)
-//     {
-//         if (granted == YES)
-//         {
-//             NSArray *arrayOfAccounts = [account
-//                                         accountsWithAccountType:accountType];
-//             
-//             if ([arrayOfAccounts count] > 0)
-//             {
-//                 ACAccount *fbAccount =
-//                 [arrayOfAccounts lastObject];
-//                 
-//                 NSURL *requestURL = [NSURL URLWithString:
-//                                      @"https://graph.facebook.com/me/feed"];
-//                 
-//                 NSDictionary *parameters =
-//                 @{@"screen_name" : @"",
-//                   @"include_rts" : @"0",
-//                   @"trim_user" : @"1",
-//                   @"count" : @"20"};
-//                 
-//                 SLRequest *postRequest = [SLRequest
-//                                           requestForServiceType:SLServiceTypeFacebook
-//                                           requestMethod:SLRequestMethodGET
-//                                           URL:requestURL parameters:parameters];
-//                 
-//                 postRequest.account = fbAccount;
-//                 
-//                 [postRequest performRequestWithHandler:
-//                  ^(NSData *responseData, NSHTTPURLResponse
-//                    *urlResponse, NSError *error)
-//                  {
-//                      self.fbData = [NSJSONSerialization
-//                                          JSONObjectWithData:responseData
-//                                          options:NSJSONReadingMutableLeaves
-//                                          error:&error];
-//                      
-//                      if (self.fbData.count != 0) {
-//                          dispatch_async(dispatch_get_main_queue(), ^{
-//                              [self.twitterTable reloadData];
-//                          });
-//                      }
-//                  }];
-//             }
-//         } else {
-//             
-//             UIAlertView *alertView = [[UIAlertView alloc]
-//                                                                         initWithTitle:@"Sorry"
-//                                                                         message:error.localizedDescription
-//                                                                         delegate:self
-//                                                                         cancelButtonTitle:@"OK"
-//                                                                         otherButtonTitles:nil];
-//                                               [alertView show];
-//         }
-//     }];
-//
-    
-//    
-//    NSDictionary *options = @{
-//                              ACFacebookAppIdKey: @"716505388483428",
-//                              ACFacebookPermissionsKey: @[@"publish_stream"],
-//                              ACFacebookAudienceKey: ACFacebookAudienceEveryone
-//                              };
-//    
-//
-//    ACAccountStore *account = [[ACAccountStore alloc] init];
-//    ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
-//    NSArray *arrayOfAccounts = [account  accountsWithAccountType:accountType];
-//    ACAccount *facebookAccount = [arrayOfAccounts lastObject];
-//    // NSString *acessToken = [NSString stringWithFormat:@"%@",facebookAccount.credential.oauthToken];
-//    //  NSDictionary *parameters = @{@"access_token": acessToken};
-//    NSURL *feedURL = [NSURL URLWithString:@"https://graph.facebook.com/me/friends"];
-//    SLRequest *feedRequest = [SLRequest
-//                              requestForServiceType:SLServiceTypeFacebook
-//                              requestMethod:SLRequestMethodGET
-//                              URL:feedURL
-//                              parameters:options];
-//    feedRequest.account = facebookAccount;
-//    [feedRequest performRequestWithHandler:^(NSData *responseData,
-//                                             NSHTTPURLResponse *urlResponse, NSError *error)
-//     {
-//         NSLog(@"%@",[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding]);
-//     }];
-//
-
-//    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
-//    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
-////    NSArray *arrayOfAccounts = [[[ACAccountStore alloc] init]  accountsWithAccountType:accountType];
-////    ACAccount *facebookAccount = [arrayOfAccounts lastObject];
-//    NSLog(@"0");
-//    [accountStore requestAccessToAccountsWithType:accountType options:@{ACFacebookAppIdKey : @"716505388483428", ACFacebookPermissionsKey : @"publish_stream", ACFacebookAudienceKey : ACFacebookAudienceFriends} completion:^(BOOL granted, NSError *error) {
-//        if(granted) {
-//            NSLog(@"1");
-//            NSArray *accountsArray = [accountStore accountsWithAccountType:accountType];
-//            NSLog(@"2");
-//            if ([accountsArray count] > 0) {
-//                NSLog(@"3");
-//                ACAccount *facebookAccount = [accountsArray objectAtIndex:0];
-//                NSLog(@"4");
-//                SLRequest *facebookRequest = [SLRequest requestForServiceType:SLServiceTypeFacebook
-//                                                                requestMethod:SLRequestMethodPOST
-//                                                                          URL:[NSURL URLWithString:@"https://graph.facebook.com/me/feed"]
-//                                                                   parameters:nil];
-//                NSLog(@"5");
-//                
-//                [facebookRequest setAccount:facebookAccount];
-//                NSLog(@"6");
-//                
-//                [facebookRequest performRequestWithHandler:^(NSData* responseData, NSHTTPURLResponse* urlResponse, NSError* error) {
-//                    NSLog(@"%@", [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding]);
-//                }];
-//                
-//                
-//            }
-//                   }
-//        else printf("not granted\n");
-//
-//    }];
-//
-
-//    if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
-//        // TODO: publish content.
-//        NSLog(@"1");
-//        UIImage *_image = [UIImage imageNamed:@"Coop3.jpg"];
-//        NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
-//        [params setObject:@"Hi , This posting from my iOs app" forKey:@"message"];
-//        [params setObject:UIImagePNGRepresentation(_image) forKey:@"picture"];
-//        
-//        if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
-//            [[[FBSDKGraphRequest alloc]
-//              initWithGraphPath:@"me/photos"
-//              parameters: params
-//              HTTPMethod:@"POST"]
-//             startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-//                 if (!error) {
-//                     NSLog(@"Post id:%@", result);
-//                     UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Facebook"
-//                                                                           message:@"Post successfullyqu"
-//                                                                          delegate:nil
-//                                                                 cancelButtonTitle:@"OK"
-//                                                                 otherButtonTitles: nil];
-//                     [myAlertView show];
-//                     
-//                 }
-//                 else {
-//                     NSLog(@"error :%@",error);
-//                 }
-//             }];
-//        }
-//        
-//    } else {
-//        FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
-//        [loginManager logInWithPublishPermissions:@[@"publish_actions"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-//            //TODO: process error or result.
-//            NSLog(@"2");
-//        }];
-//    }
-    
-    
-    
-//    UIWebView *webDesc = [[UIWebView alloc]initWithFrame:CGRectMake(12, 50, 276, 228)];
-//    
-//    NSString *embedHTML =@"";
-//    
-//    webDesc.userInteractionEnabled = NO;
-//    webDesc.opaque = NO;
-//    webDesc.backgroundColor = [UIColor clearColor];
-//    [webDesc loadHTMLString: embedHTML baseURL: nil];
-//    [self.view addSubview:webDesc];
-    
 }
+
 - (IBAction)fbButtonClicked:(id)sender {
     if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook])
     {
@@ -619,13 +445,187 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+
+//    ACAccountStore *account = [[ACAccountStore alloc] init];
+//    ACAccountType *accountType = [account
+//                                  accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
+//    NSDictionary *options = @{
+//                              ACFacebookAppIdKey: @"716505388483428",
+//                              ACFacebookPermissionsKey: @[@"publish_stream"],
+//                              ACFacebookAudienceKey: ACFacebookAudienceEveryone
+//                              };
+//    [account requestAccessToAccountsWithType:accountType
+//                                     options:options completion:^(BOOL granted, NSError *error)
+//     {
+//         if (granted == YES)
+//         {
+//             NSArray *arrayOfAccounts = [account
+//                                         accountsWithAccountType:accountType];
+//
+//             if ([arrayOfAccounts count] > 0)
+//             {
+//                 ACAccount *fbAccount =
+//                 [arrayOfAccounts lastObject];
+//
+//                 NSURL *requestURL = [NSURL URLWithString:
+//                                      @"https://graph.facebook.com/me/feed"];
+//
+//                 NSDictionary *parameters =
+//                 @{@"screen_name" : @"",
+//                   @"include_rts" : @"0",
+//                   @"trim_user" : @"1",
+//                   @"count" : @"20"};
+//
+//                 SLRequest *postRequest = [SLRequest
+//                                           requestForServiceType:SLServiceTypeFacebook
+//                                           requestMethod:SLRequestMethodGET
+//                                           URL:requestURL parameters:parameters];
+//
+//                 postRequest.account = fbAccount;
+//
+//                 [postRequest performRequestWithHandler:
+//                  ^(NSData *responseData, NSHTTPURLResponse
+//                    *urlResponse, NSError *error)
+//                  {
+//                      self.fbData = [NSJSONSerialization
+//                                          JSONObjectWithData:responseData
+//                                          options:NSJSONReadingMutableLeaves
+//                                          error:&error];
+//
+//                      if (self.fbData.count != 0) {
+//                          dispatch_async(dispatch_get_main_queue(), ^{
+//                              [self.twitterTable reloadData];
+//                          });
+//                      }
+//                  }];
+//             }
+//         } else {
+//
+//             UIAlertView *alertView = [[UIAlertView alloc]
+//                                                                         initWithTitle:@"Sorry"
+//                                                                         message:error.localizedDescription
+//                                                                         delegate:self
+//                                                                         cancelButtonTitle:@"OK"
+//                                                                         otherButtonTitles:nil];
+//                                               [alertView show];
+//         }
+//     }];
+//
+
+//
+//    NSDictionary *options = @{
+//                              ACFacebookAppIdKey: @"716505388483428",
+//                              ACFacebookPermissionsKey: @[@"publish_stream"],
+//                              ACFacebookAudienceKey: ACFacebookAudienceEveryone
+//                              };
+//
+//
+//    ACAccountStore *account = [[ACAccountStore alloc] init];
+//    ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
+//    NSArray *arrayOfAccounts = [account  accountsWithAccountType:accountType];
+//    ACAccount *facebookAccount = [arrayOfAccounts lastObject];
+//    // NSString *acessToken = [NSString stringWithFormat:@"%@",facebookAccount.credential.oauthToken];
+//    //  NSDictionary *parameters = @{@"access_token": acessToken};
+//    NSURL *feedURL = [NSURL URLWithString:@"https://graph.facebook.com/me/friends"];
+//    SLRequest *feedRequest = [SLRequest
+//                              requestForServiceType:SLServiceTypeFacebook
+//                              requestMethod:SLRequestMethodGET
+//                              URL:feedURL
+//                              parameters:options];
+//    feedRequest.account = facebookAccount;
+//    [feedRequest performRequestWithHandler:^(NSData *responseData,
+//                                             NSHTTPURLResponse *urlResponse, NSError *error)
+//     {
+//         NSLog(@"%@",[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding]);
+//     }];
+//
+
+//    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+//    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
+////    NSArray *arrayOfAccounts = [[[ACAccountStore alloc] init]  accountsWithAccountType:accountType];
+////    ACAccount *facebookAccount = [arrayOfAccounts lastObject];
+//    NSLog(@"0");
+//    [accountStore requestAccessToAccountsWithType:accountType options:@{ACFacebookAppIdKey : @"716505388483428", ACFacebookPermissionsKey : @"publish_stream", ACFacebookAudienceKey : ACFacebookAudienceFriends} completion:^(BOOL granted, NSError *error) {
+//        if(granted) {
+//            NSLog(@"1");
+//            NSArray *accountsArray = [accountStore accountsWithAccountType:accountType];
+//            NSLog(@"2");
+//            if ([accountsArray count] > 0) {
+//                NSLog(@"3");
+//                ACAccount *facebookAccount = [accountsArray objectAtIndex:0];
+//                NSLog(@"4");
+//                SLRequest *facebookRequest = [SLRequest requestForServiceType:SLServiceTypeFacebook
+//                                                                requestMethod:SLRequestMethodPOST
+//                                                                          URL:[NSURL URLWithString:@"https://graph.facebook.com/me/feed"]
+//                                                                   parameters:nil];
+//                NSLog(@"5");
+//
+//                [facebookRequest setAccount:facebookAccount];
+//                NSLog(@"6");
+//
+//                [facebookRequest performRequestWithHandler:^(NSData* responseData, NSHTTPURLResponse* urlResponse, NSError* error) {
+//                    NSLog(@"%@", [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding]);
+//                }];
+//
+//
+//            }
+//                   }
+//        else printf("not granted\n");
+//
+//    }];
+//
+
+//    if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
+//        // TODO: publish content.
+//        NSLog(@"1");
+//        UIImage *_image = [UIImage imageNamed:@"Coop3.jpg"];
+//        NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
+//        [params setObject:@"Hi , This posting from my iOs app" forKey:@"message"];
+//        [params setObject:UIImagePNGRepresentation(_image) forKey:@"picture"];
+//
+//        if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
+//            [[[FBSDKGraphRequest alloc]
+//              initWithGraphPath:@"me/photos"
+//              parameters: params
+//              HTTPMethod:@"POST"]
+//             startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+//                 if (!error) {
+//                     NSLog(@"Post id:%@", result);
+//                     UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Facebook"
+//                                                                           message:@"Post successfullyqu"
+//                                                                          delegate:nil
+//                                                                 cancelButtonTitle:@"OK"
+//                                                                 otherButtonTitles: nil];
+//                     [myAlertView show];
+//
+//                 }
+//                 else {
+//                     NSLog(@"error :%@",error);
+//                 }
+//             }];
+//        }
+//
+//    } else {
+//        FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
+//        [loginManager logInWithPublishPermissions:@[@"publish_actions"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+//            //TODO: process error or result.
+//            NSLog(@"2");
+//        }];
+//    }
+
+
+
+//    UIWebView *webDesc = [[UIWebView alloc]initWithFrame:CGRectMake(12, 50, 276, 228)];
+//
+//    NSString *embedHTML =@"";
+//
+//    webDesc.userInteractionEnabled = NO;
+//    webDesc.opaque = NO;
+//    webDesc.backgroundColor = [UIColor clearColor];
+//    [webDesc loadHTMLString: embedHTML baseURL: nil];
+//    [self.view addSubview:webDesc];
+
+
+
 @end
